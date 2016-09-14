@@ -1,0 +1,14 @@
+{
+	"category" : "Metalo-Experiments-PrivateMethods",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"metaModule" ],
+	"name" : "MLPrivateMessageSendCompilerPlugin",
+	"pools" : [
+		 ],
+	"super" : "OCCompilerASTPlugin",
+	"type" : "normal" }

@@ -1,0 +1,4 @@
+*Metalo
+basicSymbol
+	
+	^ self

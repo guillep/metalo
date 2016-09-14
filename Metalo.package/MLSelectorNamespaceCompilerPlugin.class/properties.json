@@ -1,0 +1,14 @@
+{
+	"category" : "Metalo-Experiments-SelectorNamespace",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"metaModule" ],
+	"name" : "MLSelectorNamespaceCompilerPlugin",
+	"pools" : [
+		 ],
+	"super" : "OCCompilerASTPlugin",
+	"type" : "normal" }

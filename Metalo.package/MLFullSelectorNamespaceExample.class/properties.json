@@ -1,0 +1,14 @@
+{
+	"category" : "Metalo-Examples",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "MLFullSelectorNamespaceExample",
+	"pools" : [
+		 ],
+	"super" : "MLModule",
+	"type" : "normal" }

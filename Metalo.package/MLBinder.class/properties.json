@@ -1,0 +1,15 @@
+{
+	"category" : "Metalo-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"class",
+		"metaModule" ],
+	"name" : "MLBinder",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

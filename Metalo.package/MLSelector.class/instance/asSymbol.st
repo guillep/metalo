@@ -1,0 +1,4 @@
+compiler-compatibility
+asSymbol
+
+	^ self
