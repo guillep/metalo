@@ -6,11 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"name",
-		"metaModule",
-		"nameBindings",
-		"importedNameBindings" ],
-	"name" : "MLModule",
+		"nameToImport",
+		"bindingSource" ],
+	"name" : "MLImport",
 	"pools" : [
 		 ],
 	"super" : "Object",

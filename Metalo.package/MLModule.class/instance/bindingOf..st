@@ -1,4 +1,5 @@
 compiling
 bindingOf: aName
 
-	^ definitions bindingOf: aName
+	^ (nameBindings bindingOf: aName)
+		ifNil: [ importedNameBindings bindingOf: aName ]

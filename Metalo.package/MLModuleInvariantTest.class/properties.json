@@ -1,14 +1,14 @@
 {
-	"category" : "Metalo-Core",
+	"category" : "Metalo-Tests",
 	"classinstvars" : [
 		 ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"imports" ],
-	"name" : "MLImportingModule",
+		"module" ],
+	"name" : "MLModuleInvariantTest",
 	"pools" : [
 		 ],
-	"super" : "MLModule",
+	"super" : "TestCase",
 	"type" : "normal" }

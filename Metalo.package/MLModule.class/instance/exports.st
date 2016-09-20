@@ -1,4 +1,4 @@
 accessing
 exports
 	
-	^ definitions
+	^ nameBindings

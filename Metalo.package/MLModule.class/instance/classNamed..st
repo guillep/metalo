@@ -1,4 +1,4 @@
 accessing
 classNamed: aString 
 	
-	^ definitions at: aString
+	^ nameBindings at: aString
