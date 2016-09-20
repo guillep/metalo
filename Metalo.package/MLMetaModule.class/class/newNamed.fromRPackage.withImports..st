@@ -7,6 +7,11 @@ newNamed: aName fromRPackage: anRPackage withImports: importsCollection
 	| module |
 	module := self createModuleNamed: aName.
 	importsCollection do: [ :each | each importInto: module ].
-	anRPackage definedClasses do: [ :aClassDefinition | 
-		module metaModule createClass: aClassDefinition. ].
+	module metaModule createClasses: anRPackage definedClasses.
+	
+	anRPackage definedClasses do: [ :c | | definedMethods | 
+		definedMethods := anRPackage definedMethodsForClass: c.
+		definedMethods do: [ :method | 
+			module metaModule compileMethod: method sourceCode inClass: (module resolveName: c name) ] ].
+	
 	^ module 

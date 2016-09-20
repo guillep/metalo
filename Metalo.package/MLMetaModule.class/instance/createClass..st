@@ -8,7 +8,7 @@ createClass: aClassDefinition
 	
 	theClass := AnonymousClassInstaller make: [ :builder | 
 		builder
-			superclass: aClassDefinition superclass;
+			superclass: (module resolveName: aClassDefinition superclass name);
 			name: aClassDefinition name;
 			layoutClass: aClassDefinition classLayout class;
 			slots: (aClassDefinition slots collect: [ :each | each copy ]);
@@ -19,5 +19,5 @@ createClass: aClassDefinition
 			classTraitComposition: #() asTraitComposition;
 			environment: Dictionary new ].
 		
-	module addClass: aClassDefinition.
+	module addClass: theClass.
 	^ theClass

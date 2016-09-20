@@ -6,11 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"class",
-		"metaModule",
-		"sourceCode" ],
-	"name" : "MLBinder",
+		"name" ],
+	"name" : "MLUnresolvedNameError",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "Error",
 	"type" : "normal" }
