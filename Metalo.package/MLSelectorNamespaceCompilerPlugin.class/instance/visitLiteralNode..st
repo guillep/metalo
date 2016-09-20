@@ -1,4 +1,0 @@
-accessing
-visitLiteralNode: aRBLiteralValueNode 
-	
-	"Nothing"

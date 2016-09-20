@@ -1,4 +1,0 @@
-accessing
-visitSelfNode: aRBSelfNode 
-
-	"Nothing"
