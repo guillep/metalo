@@ -1,4 +1,4 @@
-as yet unclassified
+tests-name invariants
 testNonLocalNonImportedNameIsNotResolved
 
 	self assert: (Smalltalk globals includesKey: #Point).

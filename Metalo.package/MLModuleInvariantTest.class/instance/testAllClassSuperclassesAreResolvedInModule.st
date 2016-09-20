@@ -1,4 +1,4 @@
-as yet unclassified
+tests-name invariants
 testAllClassSuperclassesAreResolvedInModule
 
 	module classes do: [ :class |
