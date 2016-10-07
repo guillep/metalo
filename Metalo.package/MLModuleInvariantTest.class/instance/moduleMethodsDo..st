@@ -1,6 +1,6 @@
 running
 moduleMethodsDo: block
 	
-	module classes do: [ :class |
+	networkModule classes do: [ :class |
 		class methods do: block.
 		class class methods do: block ]

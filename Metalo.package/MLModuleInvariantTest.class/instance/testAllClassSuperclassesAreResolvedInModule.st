@@ -1,5 +1,5 @@
 tests-name invariants
 testAllClassSuperclassesAreResolvedInModule
 
-	module classes do: [ :class |
-		self assert: (module resolveName: class superclass name) equals: class superclass. ]
+	networkModule classes do: [ :class |
+		self assert: (networkModule resolveName: class superclass name) equals: class superclass. ]

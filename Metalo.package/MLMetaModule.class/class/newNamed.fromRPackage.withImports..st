@@ -1,17 +1,23 @@
 instance-creation
-newNamed: aName fromRPackage: anRPackage withImports: importsCollection
+newNamed: aName fromRPackage: anRPackage withImports: bindingCollection
 	
 	"
 	MLMetaModule newNamed: 'Network' fromRPackage: (RPackage organizer packageNamed: 'Network-Kernel')
 	"
 	| module |
 	module := self createModuleNamed: aName.
-	importsCollection do: [ :each | each importInto: module ].
+	bindingCollection do: [ :each | 
+		module addBinding: each ].
 	module metaModule createClasses: anRPackage definedClasses.
 	
-	anRPackage definedClasses do: [ :c | | definedMethods | 
+	anRPackage definedClasses do: [ :c | | definedMethods definedClassMethods | 
 		definedMethods := anRPackage definedMethodsForClass: c.
 		definedMethods do: [ :method | 
-			module metaModule compileMethod: method sourceCode inClass: (module resolveName: c name) ] ].
+			module metaModule compileMethod: method sourceCode inClass: (module resolveName: c name) ].
+		definedClassMethods := anRPackage definedMethodsForClass: c classSide.
+		definedClassMethods do: [ :method | 
+			module metaModule compileMethod: method sourceCode inClass: (module resolveName: c name) classSide ]  ].
+	
+	module initializeModule.
 	
 	^ module 

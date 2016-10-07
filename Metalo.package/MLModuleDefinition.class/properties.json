@@ -6,10 +6,11 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"moduleName",
-		"name" ],
-	"name" : "MLUnresolvedNameError",
+		"name",
+		"imports",
+		"rPackages" ],
+	"name" : "MLModuleDefinition",
 	"pools" : [
 		 ],
-	"super" : "Error",
+	"super" : "Object",
 	"type" : "normal" }

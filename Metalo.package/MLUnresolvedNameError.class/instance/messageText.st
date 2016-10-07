@@ -1,4 +1,7 @@
 accessing
 messageText
 
-	^ 'Unresolved Name in module: ', name asString
+	^ 'Unresolved Name ''{name}'' in module ''{module}'''
+		format: {
+			'name' -> name asString.
+			'module' -> moduleName asString } asDictionary

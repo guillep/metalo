@@ -3,6 +3,8 @@ createClass: aClassDefinition
 	
 	| theClass |
 	
+	(module includesName: aClassDefinition name) ifTrue: [ ^ self ].
+	
 	aClassDefinition classSide slots ifNotEmpty: [ self halt ].
 	aClassDefinition traitComposition isEmpty ifFalse: [ self halt ].
 	
@@ -17,7 +19,8 @@ createClass: aClassDefinition
 			classSlots: #();
 			traitComposition: #() asTraitComposition;
 			classTraitComposition: #() asTraitComposition;
-			environment: Dictionary new ].
-		
+			environment: module ].
+	
+	theClass environment: module.
 	module addClass: theClass.
 	^ theClass

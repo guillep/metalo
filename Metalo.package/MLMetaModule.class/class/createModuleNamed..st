@@ -6,6 +6,7 @@ createModuleNamed: aString
 	metaModule := self new.
 	
 	module := moduleClass new.
+	moduleClass environment: module.
 	module name: aString.
 	module metaModule: metaModule.
 	metaModule module: module.

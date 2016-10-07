@@ -4,5 +4,5 @@ testAllMethodLiteralsImportedByModuleAreResolvedAsExternal
 	self moduleMethodsDo: [ :method |
 			method literals do: [ :literal |
 				((literal isKindOf: GlobalVariable)) ifTrue: [ 
-					self assert: ((module includesName: literal key) 
-						or: [ (module importedBindingOf: literal key) == literal ]) ] ] ]
+					self assert: ((networkModule includesName: literal key) 
+						or: [ (networkModule importedBindingOf: literal key) == literal ]) ] ] ]

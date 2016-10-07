@@ -1,4 +1,4 @@
 tests-name invariants
 testImportedClassIsIdenticalToClassOutsideModule
 
-	self assert: (module resolveName: #Object) == Object
+	self assert: (networkModule resolveName: #Object) == Object

@@ -1,4 +1,4 @@
 tests-name invariants
 testClassInsideModuleIsDifferentFromClassOutsideModule
 
-	self deny: (module resolveName: #HTTPProgress) == HTTPProgress
+	self deny: (networkModule resolveName: #HTTPProgress) == HTTPProgress

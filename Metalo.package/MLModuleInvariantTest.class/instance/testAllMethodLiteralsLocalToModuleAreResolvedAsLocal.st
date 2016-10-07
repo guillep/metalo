@@ -4,5 +4,5 @@ testAllMethodLiteralsLocalToModuleAreResolvedAsLocal
 	self moduleMethodsDo: [ :method |
 			method literals do: [ :literal |
 				((literal isKindOf: GlobalVariable)) ifTrue: [ 
-					self assert: ((module includesName: literal key) not 
-						or: [ (module localBindingOf: literal key) == literal ]) ] ] ]
+					self assert: ((networkModule includesName: literal key) not 
+						or: [ (networkModule localBindingOf: literal key) == literal ]) ] ] ]

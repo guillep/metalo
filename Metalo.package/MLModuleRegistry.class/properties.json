@@ -6,10 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"moduleName",
-		"name" ],
-	"name" : "MLUnresolvedNameError",
+		"moduleEnvironment" ],
+	"name" : "MLModuleRegistry",
 	"pools" : [
 		 ],
-	"super" : "Error",
+	"super" : "Object",
 	"type" : "normal" }

@@ -9,5 +9,4 @@ bindingOf: aName
 	ast := RBParser parseMethod: sourceCode.
 	(ast allDefinedVariables includes: aName) ifTrue: [ ^ nil ].
 
-	^ (class classPool bindingOf: aName)
-		ifNil: [ metaModule bindingOf: aName ]
+	^ class bindingOf: aName
