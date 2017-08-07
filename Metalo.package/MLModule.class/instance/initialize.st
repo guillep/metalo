@@ -2,8 +2,7 @@ accessing
 initialize
 
 	super initialize.	
+	imports := Set new.
 	nameBindings := Dictionary new.
-	nameBindings at: self class name put: self class.
-	nameBindings at: #thisModule put: self.
-	
 	importedNameBindings := Dictionary new.
+	undeclaredBindings := Dictionary new.

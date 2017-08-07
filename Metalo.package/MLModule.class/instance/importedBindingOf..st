@@ -1,4 +1,4 @@
-compiling
+binding-resolution
 importedBindingOf: aName
 
-	^ self bindingOf: aName fromBindingSource: importedNameBindings
+	^ (self importNamed: aName) binding

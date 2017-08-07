@@ -1,17 +1,18 @@
 {
-	"category" : "Metalo-Core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Metalo-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"name",
 		"metaModule",
 		"nameBindings",
-		"importedNameBindings" ],
+		"importedNameBindings",
+		"undeclaredBindings",
+		"imports"
+	],
 	"name" : "MLModule",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

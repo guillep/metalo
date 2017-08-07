@@ -9,4 +9,5 @@ bindingOf: aName
 	ast := RBParser parseMethod: sourceCode.
 	(ast allDefinedVariables includes: aName) ifTrue: [ ^ nil ].
 
-	^ class bindingOf: aName
+	^ (class instanceSide innerBindingOf: aName)
+		ifNil: [ module resolveBinding: aName ]

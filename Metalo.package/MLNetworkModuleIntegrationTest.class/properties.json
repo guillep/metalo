@@ -1,0 +1,18 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "Metalo-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"testModule",
+		"networkModule",
+		"registry",
+		"networkCore",
+		"networkMIME",
+		"networkTests"
+	],
+	"name" : "MLNetworkModuleIntegrationTest",
+	"type" : "normal"
+}

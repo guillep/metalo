@@ -1,15 +1,16 @@
 {
+	"commentStamp" : "StephaneDucasse 3/15/2017 13:19",
+	"super" : "TestCase",
 	"category" : "Metalo-Tests",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"testModule",
-		"networkModule" ],
+		"networkModule",
+		"registry",
+		"networkCore"
+	],
 	"name" : "MLModuleInvariantTest",
-	"pools" : [
-		 ],
-	"super" : "TestCase",
-	"type" : "normal" }
+	"type" : "normal"
+}

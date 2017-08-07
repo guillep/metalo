@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "MLModuleBinding",
+	"category" : "Metalo-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MLUnboundVariable",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "Association",
+	"category" : "Metalo-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MLModuleBinding",
+	"type" : "normal"
+}

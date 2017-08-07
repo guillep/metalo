@@ -1,15 +1,16 @@
 {
+	"commentStamp" : "StephaneDucasse 3/15/2017 11:13",
+	"super" : "Object",
 	"category" : "Metalo-Core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"nameToImport",
-		"bindingSourceName" ],
+		"bindingSourceName",
+		"module",
+		"importBinding"
+	],
 	"name" : "MLImport",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

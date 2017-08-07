@@ -1,0 +1,4 @@
+class creation
+undeclaredBindings
+
+	^ undeclaredBindings

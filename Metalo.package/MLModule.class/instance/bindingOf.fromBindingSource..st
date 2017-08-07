@@ -1,4 +1,4 @@
-private
+binding-resolution
 bindingOf: aName fromBindingSource: aSource
 
 	| resolvedName |
