@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "GuillermoPolito 8/8/2017 17:23",
+	"super" : "Object",
+	"category" : "Metalo-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MLTODOs",
+	"type" : "normal"
+}
