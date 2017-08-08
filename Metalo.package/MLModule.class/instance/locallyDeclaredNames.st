@@ -1,4 +1,4 @@
 class creation
 locallyDeclaredNames
 			
-	^ classBindings values, variableBindings values
+	^ (classBindings associations, variableBindings values) asDictionary

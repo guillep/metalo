@@ -1,4 +1,8 @@
 binding-resolution
 localBindingOf: aName
-
-	^ self bindingOf: aName fromBindingSource: classBindings
+	| binding |
+	binding := classBindings bindingOf: aName.
+	^ binding
+		ifNil: [ | resolvedName |
+			resolvedName := variableBindings at: aName ifAbsent: [ nil ].
+			resolvedName ifNil: [ (MLUnresolvedNameError named: aName inModuleNamed: name) signal ] ]
