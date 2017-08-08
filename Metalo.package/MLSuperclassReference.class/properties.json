@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Metalo-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"referencingClass",
+		"referencedBinding"
+	],
+	"name" : "MLSuperclassReference",
+	"type" : "normal"
+}
