@@ -1,4 +1,4 @@
 binding-resolution
 localBindingOf: aName
 
-	^ self bindingOf: aName fromBindingSource: nameBindings
+	^ self bindingOf: aName fromBindingSource: classBindings

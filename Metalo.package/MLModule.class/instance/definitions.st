@@ -1,4 +1,4 @@
 accessing
 definitions
 	
-	^ nameBindings
+	^ classBindings

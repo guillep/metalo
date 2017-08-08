@@ -1,8 +1,8 @@
-tests
+test-class bindings
 testCreateClassInModuleDefinesClassNameInModule
 
 	| module |
 	module := MLModule newNamed: 'myModule'.
-	module createClassNamed: #Object.
+	module declareClassNamed: #Object.
 	
 	self assert: (module definesName: #Object)

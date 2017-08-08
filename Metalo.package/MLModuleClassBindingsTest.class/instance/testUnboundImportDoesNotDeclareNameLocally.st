@@ -1,9 +1,9 @@
-tests
-testUnboundImportSuperclassDoesNotDefineSuperclassName
+test-import
+testUnboundImportDoesNotDeclareNameLocally
 
 	| module |
 	module := MLModule newNamed: 'myModule'.
 	module import: #Object from: #Kernel.
-	module createClassNamed: #Point subclassOf: #Object.
 	
+	"An import does not declare a name in the module"
 	self deny: (module definesName: #Object)

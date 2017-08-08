@@ -1,7 +1,11 @@
 class creation
-createClassNamed: aClassName subclassOf: aSuperclassName
+declareClassNamed: aClassName subclassOf: aSuperclassName
 	
 	| classCreated |
+	
+	self assertVariableNotDeclared: aClassName.
+	self assertNameNotImported: aClassName.
+	
 	classCreated := self
 		basicCreateClassNamed: aClassName
 		subclassOf: aSuperclassName.

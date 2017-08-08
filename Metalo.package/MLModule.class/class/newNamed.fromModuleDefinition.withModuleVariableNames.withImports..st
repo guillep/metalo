@@ -5,7 +5,7 @@ newNamed: aName fromModuleDefinition: aModuleDefinition withModuleVariableNames:
 	| module |
 	module := self newNamed: aName.
 	importsCollection do: [ :each | module addBinding: each ].
-	aModuleVariableNameCollection do: [ :aVariableName | module defineVariableNamed: aVariableName ].
+	aModuleVariableNameCollection do: [ :aVariableName | module declareVariableNamed: aVariableName ].
 	module createClasses:
 		aModuleDefinition definedClasses.
 	aModuleDefinition definedClasses

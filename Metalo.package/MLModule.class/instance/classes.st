@@ -1,5 +1,5 @@
 accessing
 classes
 	
-	^ nameBindings values
+	^ classBindings values
 		select: [ :definition | definition isClass ]

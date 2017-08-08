@@ -1,4 +1,4 @@
 accessing
 environment: aCollection 
 	
-	nameBindings := aCollection
+	classBindings := aCollection

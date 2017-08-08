@@ -1,8 +1,8 @@
 binding-resolution
 resolveBinding: aString 
 	
-	(nameBindings includesKey: aString)
-		ifTrue: [ ^ nameBindings bindingOf: aString ].
+	(classBindings includesKey: aString)
+		ifTrue: [ ^ classBindings bindingOf: aString ].
 	(importedNameBindings includesKey: aString)
 		ifTrue: [ ^ importedNameBindings bindingOf: aString ].
 

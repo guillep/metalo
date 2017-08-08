@@ -3,7 +3,7 @@ testBoundImportIsNotInUnboundImportCollection
 
 	| importee importer |
 	importee := MLModule newNamed: #SomeContainerModule.
-	importee defineVariableNamed: #SomeName.
+	importee declareVariableNamed: #SomeName.
 
 	importer := MLModule newNamed: 'MEmptyModule'.
 	importer import: #SomeName from: #SomeContainerModule.

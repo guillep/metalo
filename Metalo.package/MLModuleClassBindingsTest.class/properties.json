@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "MLModuleClassCreationTest",
+	"name" : "MLModuleClassBindingsTest",
 	"type" : "normal"
 }

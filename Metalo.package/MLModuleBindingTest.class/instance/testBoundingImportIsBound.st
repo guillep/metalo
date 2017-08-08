@@ -3,7 +3,7 @@ testBoundingImportIsBound
 
 	| importee importer import |
 	importee := MLModule newNamed: #SomeContainerModule.
-	importee defineVariableNamed: #SomeName.
+	importee declareVariableNamed: #SomeName.
 
 	importer := MLModule newNamed: 'MEmptyModule'.
 	import := importer import: #SomeName from: #SomeContainerModule.

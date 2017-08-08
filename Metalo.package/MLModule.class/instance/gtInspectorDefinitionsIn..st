@@ -1,6 +1,6 @@
 ide
 gtInspectorDefinitionsIn: composite
-	<gtInspectorPresentationOrder: 1> 
+"	<gtInspectorPresentationOrder: 1> "
 	composite tabulator 
 		title: 'Definitions';
 		with: [ :t |  
@@ -8,8 +8,7 @@ gtInspectorDefinitionsIn: composite
 			t transmit to: #definitions; andShow: [:a | 
 				a list
 					title: 'Definitions';
-					display: [ :module | module definitions ];
-					icon: [ :definition | definition icon ]].
+					display: [ :module | module definitions ]].
 "			t transmit from: #pragmas; to: #methods; andShow: [:a | 
 				a list 
 					title: 'Methods';

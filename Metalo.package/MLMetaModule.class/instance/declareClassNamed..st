@@ -1,5 +1,5 @@
 configuration
-createClassNamed: aString 
+declareClassNamed: aString 
 	
 	| classCreated |
 	classCreated := self class basicCreateClassNamed: aString.

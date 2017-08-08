@@ -4,4 +4,4 @@ bindingOf: aName inModuleNamed: aModuleName
 	(self definesName: aName inModuleNamed: aModuleName)
 		ifFalse: [ ^ nil ].
 	
-	^ nameBindings bindingOf: aName
+	^ classBindings bindingOf: aName

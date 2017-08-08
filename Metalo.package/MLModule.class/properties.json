@@ -8,10 +8,11 @@
 	"instvars" : [
 		"name",
 		"metaModule",
-		"nameBindings",
 		"importedNameBindings",
 		"undeclaredBindings",
-		"imports"
+		"imports",
+		"classBindings",
+		"variableBindings"
 	],
 	"name" : "MLModule",
 	"type" : "normal"

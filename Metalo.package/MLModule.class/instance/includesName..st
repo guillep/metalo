@@ -1,4 +1,4 @@
 testing
 includesName: aName
 	
-	^ nameBindings includesKey: aName
+	^ classBindings includesKey: aName

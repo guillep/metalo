@@ -1,4 +1,4 @@
 accessing
 environment
 	
-	^ nameBindings
+	^ classBindings
