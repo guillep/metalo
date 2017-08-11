@@ -1,5 +1,5 @@
 test-import
-testRemoveImportUsedAsVariableShouldBecomeUndeclared
+testRemoveImportUsedAsReferenceShouldBecomeUndeclared
 
 	| module point import |
 	module := MLModule newNamed: 'myModule'.

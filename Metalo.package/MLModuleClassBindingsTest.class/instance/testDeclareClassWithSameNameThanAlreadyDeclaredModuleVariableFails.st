@@ -1,5 +1,5 @@
-test-declaredVariables
-testDeclareClassWithSameNameThanAlreadyDeclaredVariableFails
+test-moduleVariables
+testDeclareClassWithSameNameThanAlreadyDeclaredModuleVariableFails
 
 	| module variable |
 	module := MLModule newNamed: 'myModule'.

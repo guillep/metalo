@@ -1,5 +1,5 @@
-test-declaredVariables
-testDeclaringTwiceAVariableShareASingleVariableDeclaration
+test-moduleVariables
+testDeclaringTwiceAModuleVariableShareASingleVariableDeclaration
 
 	| module variable1 variable2 |
 	module := MLModule newNamed: 'myModule'.

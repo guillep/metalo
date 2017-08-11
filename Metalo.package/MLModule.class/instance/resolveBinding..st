@@ -3,8 +3,9 @@ resolveBinding: aString
 	
 	(classBindings includesKey: aString)
 		ifTrue: [ ^ classBindings bindingOf: aString ].
-	(variableBindings bindingOf: aString)
-		ifNotNil: [ :binding | ^ binding ].
+	variableBindings
+		at: aString
+		ifPresent: [ :binding | ^ binding ].
 	(self hasImportNamed: aString)
 		ifTrue: [ ^ self importedBindingOf: aString ].
 
