@@ -4,7 +4,7 @@ testRemoveImportUsedAsSuperclassShouldBecomeUndeclared
 	| module point |
 	module := MLModule newNamed: 'myModule'.
 	module import: #Object from: #Kernel.
-	point := module declareClassNamed: #Point subclassOf: #Object.
+	point := module declareClassNamed: #Point subclassOfClassNamed: #Object.
 
 	module removeImport: #Object from: #Kernel.
 	

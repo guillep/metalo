@@ -1,5 +1,5 @@
 class creation
-declareClassNamed: aClassName subclassOf: aSuperclass
+declareClassNamed: aClassName subclassOfClassNamed: aSuperclassName
 	
 	| classCreated |
 	
@@ -8,7 +8,7 @@ declareClassNamed: aClassName subclassOf: aSuperclass
 	
 	classCreated := self
 		basicCreateClassNamed: aClassName
-		subclassOfClass: aSuperclass.
+		subclassOfClassNamed: aSuperclassName.
 
 	self at: aClassName put: classCreated.
 	^ classCreated

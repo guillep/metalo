@@ -1,4 +1,4 @@
-class creation
+as yet unclassified
 assertNameNotImported: aName
 
 	self imports

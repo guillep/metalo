@@ -1,4 +1,4 @@
-class creation
+classes
 assertClassNotDeclared: aName
 
 	(classBindings includesKey: aName)

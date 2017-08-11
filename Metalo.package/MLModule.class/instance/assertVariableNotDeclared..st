@@ -1,4 +1,4 @@
-class creation
+as yet unclassified
 assertVariableNotDeclared: aName
 
 	(variableBindings includesKey: aName)

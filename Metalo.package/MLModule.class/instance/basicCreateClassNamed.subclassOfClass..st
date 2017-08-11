@@ -1,15 +1,8 @@
 class creation
-basicCreateClassNamed: aString subclassOf: aSuperclassNameOrNil
+basicCreateClassNamed: aString subclassOfClass: superclass
 	
-	| theClass superclass |
-	DangerousClassNotifier disableDuring: [
-		superclass := aSuperclassNameOrNil ifNotNil: [ | binding |
-			binding := self bindingOf: aSuperclassNameOrNil.
-			binding value ifNil: [ 
-				binding value: (self basicCreateClassNamed: aSuperclassNameOrNil subclassOf: nil).
-			].
-			binding value ].
-		
+	| theClass |
+	DangerousClassNotifier disableDuring: [		
 		theClass := AnonymousClassInstaller make: [ :builder |
 			builder
 				superclass: superclass;

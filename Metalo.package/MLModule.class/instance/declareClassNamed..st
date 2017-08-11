@@ -3,4 +3,4 @@ declareClassNamed: aClassName
 	
 	^ self
 		declareClassNamed: aClassName
-		subclassOf: nil
+		subclassOfClassNamed: nil

@@ -6,7 +6,7 @@ testImportUndeclaredNameRemovesUndeclared
 	module := MLModule newNamed: 'myModule'.
 	
 	"We create a subclass of an undefined class. This triggers the creation of an undefined #Object class local to the module."
-	pointClass := module declareClassNamed: #Point subclassOf: #Object.
+	pointClass := module declareClassNamed: #Point subclassOfClassNamed: #Object.
 	undeclaredBinding := module undeclaredBindings anyOne.
 	
 	"We import a name that conflicts with the undefined class name.

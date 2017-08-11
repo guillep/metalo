@@ -10,7 +10,7 @@ createClass: aClassDefinition
 	superclass := aClassDefinition superclass ifNotNil: [ | binding |
 		binding := self bindingOf: aClassDefinition superclass name.
 		binding value ifNil: [ 
-			binding value: (self basicCreateClassNamed: aClassDefinition superclass name subclassOf: nil).
+			binding value: (self basicCreateClassNamed: aClassDefinition superclass name subclassOfClassNamed: nil).
 		].
 		binding value ].
 	

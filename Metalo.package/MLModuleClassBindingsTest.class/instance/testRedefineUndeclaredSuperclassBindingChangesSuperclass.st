@@ -3,7 +3,7 @@ testRedefineUndeclaredSuperclassBindingChangesSuperclass
 
 	| module |
 	module := MLModule newNamed: 'myModule'.
-	module declareClassNamed: #Point subclassOf: #Object.
+	module declareClassNamed: #Point subclassOfClassNamed: #Object.
 	
 	"We create a class #Object.
 	Creating a class defines the name #Object in the module.
