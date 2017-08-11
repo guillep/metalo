@@ -1,5 +1,5 @@
 test-undeclareds
-testCreateVariableForUndeclaredNameRemovesUndeclared
+testDeclareModuleVariableForUndeclaredNameRemovesUndeclared
 
 	"Undeclared => Import"
 	| module pointClass undeclaredBinding binding |	
