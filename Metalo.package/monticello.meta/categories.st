@@ -1,3 +1,3 @@
 SystemOrganization addCategory: #Metalo!
-SystemOrganization addCategory: 'Metalo-Core'!
-SystemOrganization addCategory: 'Metalo-Tests'!
+SystemOrganization addCategory: #'Metalo-Core'!
+SystemOrganization addCategory: #'Metalo-Tests'!

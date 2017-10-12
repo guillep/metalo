@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "ComposableModel",
+	"category" : "MetaloTools",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"text",
+		"module",
+		"bindings",
+		"environment"
+	],
+	"name" : "MetaloWorkspace",
+	"type" : "normal"
+}

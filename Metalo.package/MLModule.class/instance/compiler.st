@@ -1,0 +1,4 @@
+accessing
+compiler
+	
+	^ OpalCompiler new
