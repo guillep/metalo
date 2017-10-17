@@ -1,7 +1,7 @@
 instance-creation
 loadRPackage: anRPackage withImportDeclarations: imports
 
-	| module |
+	| module sortedClasses |
 	module := self newNamed: (self packageToModuleName: anRPackage name).
 	
 	imports do: [ :importPerModule | | moduleName namesToImport |
@@ -10,7 +10,10 @@ loadRPackage: anRPackage withImportDeclarations: imports
 		namesToImport do: [ :aNameToImport |
 			module import: aNameToImport from: moduleName ] ].
 	
-	module createClasses: anRPackage definedClasses.
+	sortedClasses := anRPackage definedClasses
+		sorted: [ :a :b | (self numberOfDependenciesOf: a) < (self numberOfDependenciesOf: b)  ].
+	module createClasses: sortedClasses.
+	
 	anRPackage definedClasses do: [ :c | | definedMethods definedClassMethods | 
 		c isTrait ifFalse: [
 			definedMethods := anRPackage definedMethodsForClass: c.
