@@ -2,6 +2,6 @@ classes
 assertClassNotDeclared: aName
 
 	(classBindings includesKey: aName)
-		ifTrue: [ :each |
+		ifTrue: [
 			self error: ('Cannot declare name {1}: {1} is already declared as a class'
 				format: { aName }) ].

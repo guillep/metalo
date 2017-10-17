@@ -2,12 +2,17 @@ imports
 doImport: aName from: aContainerModuleName 
 	
 	| import |
-	import := self import: aName from: aContainerModuleName.
-	import resolveUsing: self defaultNameResolver.
+	import := MLImport name: aName from: aContainerModuleName.
+	import checkConflictsOn: self.
 	
-	"We should have the reason also..."
+	"Resolve the import. Fail if cannot resolve."
+	import resolveUsing: self defaultNameResolver.
 	import binding isUnbound
 		ifTrue: [ 
 			self error: ('Cannot resolve import: {name} from: {package}' format: {
 				'name' -> aName.
 				'package' -> aContainerModuleName } asDictionary) ].
+
+	self declareBinding: import binding.
+	imports add: import.
+	^ import
