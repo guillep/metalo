@@ -1,4 +1,4 @@
-class creation
+binding-resolution
 undeclaredBindings
 
 	^ undeclaredBindings

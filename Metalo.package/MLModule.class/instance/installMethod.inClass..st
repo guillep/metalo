@@ -1,4 +1,4 @@
-class creation
+methods
 installMethod: method inClass: aClass
 
 	| methodSelector oldMethodOrNil |

@@ -1,4 +1,4 @@
-class creation
+methods
 compileMethod: sourceCode inClass: aClass 
 	
 	| method |

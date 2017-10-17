@@ -5,7 +5,7 @@ basicCreateClassNamed: aString subclassOfClassNamed: aSuperclassNameOrNil
 	superclass := aSuperclassNameOrNil ifNotNil: [ | binding |
 		binding := self bindingOf: aSuperclassNameOrNil.
 		binding value ifNil: [ 
-			binding value: (self basicCreateClassNamed: aSuperclassNameOrNil subclassOfClassNamed: nil).
+			binding value: (self declareUndefinedClassNamed: aSuperclassNameOrNil).
 		].
 		binding value
 	].

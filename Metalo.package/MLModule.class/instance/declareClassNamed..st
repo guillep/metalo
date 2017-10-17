@@ -1,6 +1,9 @@
 class creation
 declareClassNamed: aClassName
 	
-	^ self
-		declareClassNamed: aClassName
-		subclassOfClassNamed: nil
+	^ self declareClass: (MCClassDefinition
+		name: aClassName
+		superclassName: nil
+		category: 'no category'
+		instVarNames: #( )
+		comment: 'no comments').

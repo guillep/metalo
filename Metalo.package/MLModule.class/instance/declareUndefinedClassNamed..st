@@ -2,5 +2,10 @@ class creation
 declareUndefinedClassNamed: aClassName
 	
 	^ self
-		declareClassNamed: aClassName
-		subclassOf: UndefinedClass
+		basicCreateClass: (MCClassDefinition
+			name: aClassName
+			superclassName: nil
+			category: 'no category'
+			instVarNames: #( )
+			comment: 'no comments')
+		superclass: UndefinedClass

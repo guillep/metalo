@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "PharoClassInstaller",
+	"category" : "Metalo-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MLClassInstaller",
+	"type" : "normal"
+}
