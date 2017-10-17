@@ -1,5 +1,4 @@
 helpers
 numberOfDependenciesOf: aClass 
-	
-	^ ((aClass allSuperclasses, aClass traits)
-		select: [ :e | e package = aClass package ]) size
+
+	^ (aClass allSuperclasses select: [ :e | e package = aClass package ]) size

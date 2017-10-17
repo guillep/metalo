@@ -1,5 +1,5 @@
 tests
 testModuleNameOfPackageRemovesDashes
-	| dependenciesDict packageName |
+	| packageName |
 	packageName := #'Network-Kernel'.
 	self assert: (MLBootstrap moduleNameForPackageName: packageName) equals: #'NetworkKernel'

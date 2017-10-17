@@ -1,0 +1,4 @@
+compatibility
+organization
+	
+	^ SystemOrganizer new
