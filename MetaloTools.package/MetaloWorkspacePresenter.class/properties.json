@@ -1,15 +1,14 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
+	"super" : "ComposablePresenter",
 	"category" : "MetaloTools",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"module",
-		"bindings",
-		"environment"
+		"text",
+		"model"
 	],
-	"name" : "MetaloWorkspace",
+	"name" : "MetaloWorkspacePresenter",
 	"type" : "normal"
 }

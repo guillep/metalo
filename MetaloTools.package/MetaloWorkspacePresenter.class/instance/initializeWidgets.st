@@ -9,8 +9,8 @@ initializeWidgets
 		
 	text
 		bindKeyCombination: $d command
-		toAction: [ self evaluate: self selectedString ].
+		toAction: [ model evaluate: self selectedString ].
 		
 	text
 		bindKeyCombination: $p command
-		toAction: [ self printResultOf: self selectedString ].
+		toAction: [ model printResultOf: self selectedString ].
