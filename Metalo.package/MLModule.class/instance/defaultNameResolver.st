@@ -1,0 +1,4 @@
+imports
+defaultNameResolver
+	
+	^ MLModuleRegistry global

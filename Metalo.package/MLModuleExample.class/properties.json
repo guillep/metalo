@@ -1,15 +1,13 @@
 {
 	"commentStamp" : "",
 	"super" : "Object",
-	"category" : "Metalo-Core",
-	"classinstvars" : [
-		"global"
-	],
+	"category" : "Metalo-Examples",
+	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"moduleEnvironment"
+		"module"
 	],
-	"name" : "MLModuleRegistry",
+	"name" : "MLModuleExample",
 	"type" : "normal"
 }

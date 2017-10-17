@@ -1,6 +1,10 @@
 instance-creation
 loadRPackageNamed: rpackageName
 
-	^ self
-		loadRPackage: (RPackageOrganizer default packageNamed: rpackageName)
-		withImportDeclarations: #()
+	| module |
+	module := self newNamed: rpackageName.
+	MLRPackageLoader new
+		rpackageName: rpackageName;
+		module: module;
+		load.
+	^ module
