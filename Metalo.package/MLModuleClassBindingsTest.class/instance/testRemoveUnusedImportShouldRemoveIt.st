@@ -3,7 +3,7 @@ testRemoveUnusedImportShouldRemoveIt
 
 	| module |
 	module := MLModule newNamed: 'myModule'.
-	module import: #Object from: #Kernel.
+	module declareImport: #Object from: #Kernel.
 
 	module removeImport: #Object from: #Kernel.
 	

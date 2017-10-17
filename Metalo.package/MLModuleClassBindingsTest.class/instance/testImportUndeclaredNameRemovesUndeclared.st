@@ -11,7 +11,7 @@ testImportUndeclaredNameRemovesUndeclared
 	
 	"We import a name that conflicts with the undefined class name.
 	Explicit imports resolve undeclared names."
-	import := module import: #Object from: #Kernel.
+	import := module declareImport: #Object from: #Kernel.
 
 	"The superclass of Point should still point to an undefined class.
 	The imported name points to the undefined class."	

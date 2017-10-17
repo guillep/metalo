@@ -3,7 +3,7 @@ testRemoveImportUsedAsReferenceShouldBecomeUndeclared
 
 	| module point import |
 	module := MLModule newNamed: 'myModule'.
-	import := module import: #Object from: #Kernel.
+	import := module declareImport: #Object from: #Kernel.
 	
 	point := module declareClassNamed: #Point.
 	module compileMethod: 'test ^Object' inClass: point.

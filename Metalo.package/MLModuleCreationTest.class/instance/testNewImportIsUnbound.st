@@ -3,7 +3,7 @@ testNewImportIsUnbound
 
 	| emptyModule import |
 	emptyModule := MLModule newNamed: 'MEmptyModule'.
-	emptyModule import: #SomeName from: #SomeContainerModule.
+	emptyModule declareImport: #SomeName from: #SomeContainerModule.
 
 	self assert: emptyModule unboundImports size equals: 1.
 	

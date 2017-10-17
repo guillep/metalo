@@ -3,6 +3,6 @@ testAddingAnImportRegistersImportIntoTheModule
 
 	| importer |
 	importer := MLModule newNamed: 'MEmptyModule'.
-	importer import: #SomeName from: #SomeContainerModule.
+	importer declareImport: #SomeName from: #SomeContainerModule.
 
 	self assert: (importer hasImport: #SomeName from: #SomeContainerModule)

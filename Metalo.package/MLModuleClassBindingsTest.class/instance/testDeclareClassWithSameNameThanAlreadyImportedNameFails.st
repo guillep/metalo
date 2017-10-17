@@ -3,6 +3,6 @@ testDeclareClassWithSameNameThanAlreadyImportedNameFails
 
 	| module |
 	module := MLModule newNamed: 'myModule'.
-	module import: #Object from: #Kernel.
+	module declareImport: #Object from: #Kernel.
 	
 	self should: [module declareClassNamed: #Object] raise: Error

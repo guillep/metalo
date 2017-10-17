@@ -3,12 +3,12 @@ createTranscriptModule
 
 	module := MLModule newNamed: #'Transcript-Core'.
 
-	module doImport: #PackageManifest from: #Kernel.
-	module doImport: #Mutex from: #Kernel.
-	module doImport: #Character from: #'Kernel'.
-	module doImport: #String from: #'Collections-Sequenceable'.
-	module doImport: #Model from: #'System-Model'.
-	module doImport: #Smalltalk from: #'System-Support'.
+	module import: #PackageManifest from: #Kernel.
+	module import: #Mutex from: #Kernel.
+	module import: #Character from: #'Kernel'.
+	module import: #String from: #'Collections-Sequenceable'.
+	module import: #Model from: #'System-Model'.
+	module import: #Smalltalk from: #'System-Support'.
 
 	module declareVariableNamed: #Transcript.
 

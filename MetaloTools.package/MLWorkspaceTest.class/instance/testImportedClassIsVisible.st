@@ -3,7 +3,7 @@ testImportedClassIsVisible
 
 	| module kernel |
 	module := workspace module.
-	module import: #Point from: #Smalltalk.
+	module declareImport: #Point from: #Smalltalk.
 	
 	kernel := MLModule withEnvironment: Smalltalk globals.
 	kernel name: #Smalltalk.

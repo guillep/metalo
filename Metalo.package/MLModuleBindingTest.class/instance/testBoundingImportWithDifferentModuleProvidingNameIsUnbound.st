@@ -6,7 +6,7 @@ testBoundingImportWithDifferentModuleProvidingNameIsUnbound
 	importee declareVariableNamed: #SomeName.
 
 	importer := MLModule newNamed: 'MEmptyModule'.
-	import := importer import: #SomeName from: #SomeContainerModule.
+	import := importer declareImport: #SomeName from: #SomeContainerModule.
 
 	importer bindTo: importee.
 

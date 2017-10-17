@@ -6,4 +6,4 @@ testDeclareImportWithSameNameThanAlreadyDeclaredModuleVariableFails
 	
 	variable := module declareVariableNamed: #Variable.
 	
-	self should: [module import: #Variable from: #Kernel] raise: Error
+	self should: [module declareImport: #Variable from: #Kernel] raise: Error

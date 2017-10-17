@@ -6,4 +6,4 @@ testImportClassWithSameNameThanAlreadyDeclaredClassFails
 	
 	variable := module declareClassNamed: #Object.
 	
-	self should: [module import: #Object from: #Kernel ] raise: Error
+	self should: [module declareImport: #Object from: #Kernel ] raise: Error

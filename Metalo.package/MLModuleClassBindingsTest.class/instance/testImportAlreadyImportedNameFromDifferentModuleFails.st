@@ -3,8 +3,8 @@ testImportAlreadyImportedNameFromDifferentModuleFails
 
 	| module |
 	module := MLModule newNamed: 'myModule'.
-	module import: #Object from: #Kernel.
+	module declareImport: #Object from: #Kernel.
 	
 	self
-		should: [ module import: #Object from: #Kernel2 ]
+		should: [ module declareImport: #Object from: #Kernel2 ]
 		raise: Error

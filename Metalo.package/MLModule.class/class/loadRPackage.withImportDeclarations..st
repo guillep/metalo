@@ -8,7 +8,7 @@ loadRPackage: anRPackage withImportDeclarations: imports
 		moduleName := importPerModule key.
 		namesToImport := importPerModule value.
 		namesToImport do: [ :aNameToImport |
-			module import: aNameToImport from: moduleName ] ].
+			module declareImport: aNameToImport from: moduleName ] ].
 	
 	MLRPackageLoader new
 		rpackage: anRPackage;
