@@ -11,5 +11,5 @@ compileMethod: sourceCode inClass: aClass
 		do: [ :warning | | undeclaredName |
 			undeclaredName := (warning instVarNamed: #node) name asSymbol.
 			self undeclaredBindings at: undeclaredName ifAbsentPut: nil.
-			warning return: (self undeclaredBindings bindingOf: undeclaredName) ].
+			warning resume: (self undeclaredBindings bindingOf: undeclaredName) ].
 	^ method

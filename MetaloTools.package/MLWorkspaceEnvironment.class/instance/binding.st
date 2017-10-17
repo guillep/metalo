@@ -1,4 +1,4 @@
 compilation
 binding
 	
-	^ binding ifNil: [ binding := nil -> self ]
+	^ binding ifNil: [ binding := module name -> module class ]

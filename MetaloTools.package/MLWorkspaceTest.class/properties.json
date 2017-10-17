@@ -1,13 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
-	"category" : "MetaloTools-Core",
+	"super" : "TestCase",
+	"category" : "MetaloTools-Tests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"module"
+		"workspace"
 	],
-	"name" : "MLModuleEnvironment",
+	"name" : "MLWorkspaceTest",
 	"type" : "normal"
 }
