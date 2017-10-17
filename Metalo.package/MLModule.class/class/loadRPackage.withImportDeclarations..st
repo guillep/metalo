@@ -10,7 +10,8 @@ loadRPackage: anRPackage withImportDeclarations: imports
 		namesToImport do: [ :aNameToImport |
 			module import: aNameToImport from: moduleName ] ].
 	
-	sortedClasses := anRPackage definedClasses
+	sortedClasses := (anRPackage definedClasses
+		reject: [ :a | a isTrait ])
 		sorted: [ :a :b | (self numberOfDependenciesOf: a) < (self numberOfDependenciesOf: b)  ].
 	module createClasses: sortedClasses.
 	
