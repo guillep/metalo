@@ -1,0 +1,3 @@
+instance creation
+openOnNewModule
+	MetaloWorkspacePresenter new openWithSpec

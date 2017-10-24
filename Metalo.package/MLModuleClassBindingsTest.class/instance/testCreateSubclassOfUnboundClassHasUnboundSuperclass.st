@@ -1,8 +1,9 @@
-tests-undefined classes
+tests
 testCreateSubclassOfUnboundClassHasUnboundSuperclass
 
 	| module |
 	module := MLModule newNamed: 'myModule'.
 	module declareClassNamed: #Point subclassOfClassNamed: #Object.
 	
-	self assert: (module at: #Point) superclass notNil
+	"Point class exists and inherits from an UndefinedClass"
+	self assert: (module at: #Point) superclass isUndefined 

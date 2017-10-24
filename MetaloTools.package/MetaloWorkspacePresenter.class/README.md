@@ -1,0 +1,3 @@
+MetaloWorkspacePresenter openOnNewModule.
+
+MetaloWorkspacePresenter openOn: MLModuleExample new runExample

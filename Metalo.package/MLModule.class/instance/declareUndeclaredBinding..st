@@ -1,4 +1,4 @@
-binding-resolution
+undeclareds
 declareUndeclaredBinding: aString 
 	
 	undeclaredBindings

@@ -1,7 +1,11 @@
 notifications
 classAdded: aClass inCategory: aCategory
-	" Install the new class in the system "
-	environment at: aClass name put: aClass.
+
+	aClass isUndefined 
+		ifTrue: [ environment declareUndeclaredBinding:  aClass name with: aClass ]
+		ifFalse: [ 
+				" Install the new class in the system "
+				environment at: aClass name put: aClass ].
 	
 	aClass environment: environment.
 

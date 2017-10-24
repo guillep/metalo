@@ -1,4 +1,4 @@
-binding-resolution
+undeclareds
 hasUndeclaredBinding: aString 
 	
 	^ undeclaredBindings includesKey: aString

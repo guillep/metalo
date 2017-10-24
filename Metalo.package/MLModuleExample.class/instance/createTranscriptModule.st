@@ -2,6 +2,8 @@ examples
 createTranscriptModule
 
 	module := MLModule newNamed: #'Transcript-Core'.
+	MLModuleRegistry global
+		at:  module name put: module.
 
 	module import: #PackageManifest from: #Kernel.
 	module import: #Mutex from: #Kernel.

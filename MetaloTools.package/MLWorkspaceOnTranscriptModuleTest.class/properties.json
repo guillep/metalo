@@ -8,6 +8,6 @@
 	"instvars" : [
 		"workspace"
 	],
-	"name" : "MLWorkspaceTest",
+	"name" : "MLWorkspaceOnTranscriptModuleTest",
 	"type" : "normal"
 }
