@@ -1,4 +1,4 @@
-as yet unclassified
+private - asserting
 assertVariableNotDeclared: aName
 
 	(variableBindings includesKey: aName)

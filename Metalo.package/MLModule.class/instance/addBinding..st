@@ -1,4 +1,4 @@
-binding-resolution
+binding
 addBinding: aBinding
 	
 	importedNameBindings add: aBinding

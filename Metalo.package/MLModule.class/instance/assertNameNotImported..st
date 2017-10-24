@@ -1,4 +1,4 @@
-as yet unclassified
+private - asserting
 assertNameNotImported: aName
 
 	self imports

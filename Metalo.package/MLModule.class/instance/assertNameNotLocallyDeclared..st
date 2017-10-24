@@ -1,4 +1,4 @@
-as yet unclassified
+private - asserting
 assertNameNotLocallyDeclared: aName
 
 	self locallyDeclaredNames
