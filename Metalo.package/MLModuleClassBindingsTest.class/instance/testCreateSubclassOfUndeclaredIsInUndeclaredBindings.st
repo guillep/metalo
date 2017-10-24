@@ -11,7 +11,7 @@ testCreateSubclassOfUndeclaredIsInUndeclaredBindings
 	self assert:  (module hasUndeclaredBinding: #Object).
 
 	undefinedObjectClass := module undeclaredBindings at: #Object.
-	self assert: undefinedObjectClass  isUndefined.
+	self assert: undefinedObjectClass  isUndefinedSubclass.
 	self assert: undefinedObjectClass equals: pointClass superclass.
 	
 	

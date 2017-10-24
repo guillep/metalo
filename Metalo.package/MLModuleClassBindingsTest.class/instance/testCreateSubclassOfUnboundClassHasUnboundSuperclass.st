@@ -6,4 +6,4 @@ testCreateSubclassOfUnboundClassHasUnboundSuperclass
 	module declareClassNamed: #Point subclassOfClassNamed: #Object.
 	
 	"Point class exists and inherits from an UndefinedClass"
-	self assert: (module at: #Point) superclass isUndefined 
+	self assert: (module at: #Point) superclass isUndefinedSubclass 

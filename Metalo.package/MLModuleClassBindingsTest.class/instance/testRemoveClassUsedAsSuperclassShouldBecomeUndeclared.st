@@ -13,5 +13,5 @@ testRemoveClassUsedAsSuperclassShouldBecomeUndeclared
 
 	self assert: (module undeclaredNames includes: #Point).
 	self assert: coloredPoint superclass == module undeclaredBindings associations anyOne value.
-	self assert:  coloredPoint isUndefined.
-	self assert:  coloredPoint superclass isUndefined.
+	self assert:  coloredPoint isUndefinedSubclass.
+	self assert:  coloredPoint superclass isUndefinedSubclass.

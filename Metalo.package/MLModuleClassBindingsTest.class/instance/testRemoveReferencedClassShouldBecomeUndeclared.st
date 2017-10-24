@@ -14,4 +14,4 @@ testRemoveReferencedClassShouldBecomeUndeclared
 
 	self assert: (module undeclaredNames includes: #Point).
 	self assert: (rectangle >> #test) literals first == module undeclaredBindings associations anyOne.
-	self assert:  module undeclaredBindings associations anyOne value isUndefined.
+	self assert:  module undeclaredBindings associations anyOne value isUndefinedSubclass.
