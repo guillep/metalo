@@ -1,4 +1,4 @@
-definitions
+delcarations
 removeVariableNamed: aString 
 	
 	| aBinding |

@@ -7,7 +7,6 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"name",
-		"metaModule",
 		"importedNameBindings",
 		"undeclaredBindings",
 		"imports",

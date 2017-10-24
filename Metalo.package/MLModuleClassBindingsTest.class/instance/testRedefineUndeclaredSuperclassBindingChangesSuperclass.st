@@ -11,4 +11,4 @@ testRedefineUndeclaredSuperclassBindingChangesSuperclass
 	module declareClassNamed: #Object.
 	
 	self assert: module undeclaredNames isEmpty.
-	self assert: (module at: #Point) superclass equals: (module at: #Object)
+	self assert: (module classNamed: #Point) superclass equals: (module classNamed: #Object)

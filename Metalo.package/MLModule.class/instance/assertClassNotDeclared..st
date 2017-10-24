@@ -1,4 +1,4 @@
-classes
+asserting
 assertClassNotDeclared: aName
 
 	(classBindings includesKey: aName)

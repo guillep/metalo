@@ -6,4 +6,4 @@ testCreateSubclassOfBoundClassHasSuperclassBoundToModuleClass
 	module declareClassNamed: #Object.
 	module declareClassNamed: #Point subclassOfClassNamed: #Object.
 	
-	self assert: (module at: #Point) superclass equals: (module at: #Object)
+	self assert: (module classNamed: #Point) superclass equals: (module classNamed: #Object)

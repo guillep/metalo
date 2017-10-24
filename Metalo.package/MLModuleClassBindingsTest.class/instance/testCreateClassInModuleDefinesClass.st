@@ -5,4 +5,4 @@ testCreateClassInModuleDefinesClass
 	module := MLModule newNamed: 'myModule'.
 	module declareClassNamed: #Object.
 	
-	self assert: (module at: #Object) isClass
+	self assert: (module classNamed: #Object) isClass
