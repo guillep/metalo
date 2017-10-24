@@ -2,8 +2,7 @@ tests
 testRedefineSuperclassWithDifferentFormatReplacesOldClass
 
 	| pointClass |
-	module := MLModule newNamed: 'myModule'.
-	
+
 	"Create point class without instance variables"
 	module declareClass: (MCClassDefinition
 		name: #Object

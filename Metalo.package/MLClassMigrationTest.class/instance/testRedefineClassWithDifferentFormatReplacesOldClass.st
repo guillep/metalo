@@ -2,7 +2,6 @@ tests
 testRedefineClassWithDifferentFormatReplacesOldClass
 
 	| oldClass newClass |
-	module := MLModule newNamed: 'myModule'.
 	
 	"Create point class without instance variables"
 	oldClass := module declareClass: (MCClassDefinition

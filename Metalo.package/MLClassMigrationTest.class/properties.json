@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "TestCase",
+	"super" : "MLModuleTest",
 	"category" : "Metalo-UnitTests",
 	"classinstvars" : [ ],
 	"pools" : [ ],

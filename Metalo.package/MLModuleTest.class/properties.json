@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "MLModuleTest",
+	"super" : "TestCase",
 	"category" : "Metalo-UnitTests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "MLModuleCreationTest",
+	"name" : "MLModuleTest",
 	"type" : "normal"
 }
