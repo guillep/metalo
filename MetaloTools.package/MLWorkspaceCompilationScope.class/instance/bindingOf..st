@@ -1,8 +1,10 @@
 compilation
 bindingOf: aName
 	
-	| superBinding |
-	superBinding := parentEnvironment bindingOf: aName.
-	^ superBinding isUndeclared
-		ifTrue: [ workspace declareWorkspaceBindingNamed: aName ]
-		ifFalse: [ superBinding ]
+	| parentBinding |
+	parentBinding := parentScope bindingOf: aName.
+	^ parentBinding isUndeclared
+		ifTrue: [ 
+			aName first isUppercase ifTrue: [ MLUnknownClassError signalForName: aName ].
+			workspace declareWorkspaceBindingNamed: aName ] 
+		ifFalse: [ parentBinding ]

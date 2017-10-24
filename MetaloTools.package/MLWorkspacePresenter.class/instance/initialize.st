@@ -2,4 +2,4 @@ initialization
 initialize
 	
 	super initialize.
-	model := MetaloWorkspace new
+	model := MLWorkspace new

@@ -1,0 +1,3 @@
+instance creation
+openOnNewModule
+	MLWorkspacePresenter new openWithSpec

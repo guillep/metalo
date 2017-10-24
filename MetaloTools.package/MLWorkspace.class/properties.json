@@ -10,6 +10,6 @@
 		"bindings",
 		"environment"
 	],
-	"name" : "MetaloWorkspace",
+	"name" : "MLWorkspace",
 	"type" : "normal"
 }

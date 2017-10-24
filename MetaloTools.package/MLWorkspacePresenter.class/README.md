@@ -1,0 +1,3 @@
+MLWorkspacePresenter openOnNewModule.
+
+MLWorkspacePresenter openOn: MLModuleExample new runExample

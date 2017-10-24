@@ -2,4 +2,4 @@ running
 setUp
 
 	super setUp.
-	workspace := MetaloWorkspace  new module: MLModuleExample new runExample ; yourself 
+	workspace := MLWorkspace  new module: MLModuleExample new runExample ; yourself 

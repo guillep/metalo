@@ -7,9 +7,9 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"module",
-		"parentEnvironment",
 		"binding",
-		"workspace"
+		"workspace",
+		"parentScope"
 	],
 	"name" : "MLWorkspaceCompilationScope",
 	"type" : "normal"

@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "LucFabresse 10/24/2017 09:22",
+	"commentStamp" : "LucFabresse 10/24/2017 14:42",
 	"super" : "ComposablePresenter",
 	"category" : "MetaloTools-Core",
 	"classinstvars" : [ ],
@@ -9,6 +9,6 @@
 		"text",
 		"model"
 	],
-	"name" : "MetaloWorkspacePresenter",
+	"name" : "MLWorkspacePresenter",
 	"type" : "normal"
 }

@@ -1,5 +1,5 @@
 instance creation
 openOn: aModule
-	MetaloWorkspacePresenter new 
+	MLWorkspacePresenter new 
 		initializeWithModule: aModule;
 		openWithSpec

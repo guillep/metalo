@@ -2,4 +2,4 @@ tests
 setUp
 
 	super setUp.
-	workspace := MetaloWorkspace new.
+	workspace := MLWorkspace new.
