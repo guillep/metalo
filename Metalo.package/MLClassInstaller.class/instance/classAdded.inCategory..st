@@ -1,7 +1,7 @@
 notifications
 classAdded: aClass inCategory: aCategory
 
-	aClass isUndefined 
+	aClass superclass == UndefinedClass 
 		ifTrue: [ environment declareUndeclaredBinding:  aClass name with: aClass ]
 		ifFalse: [ 
 				" Install the new class in the system "

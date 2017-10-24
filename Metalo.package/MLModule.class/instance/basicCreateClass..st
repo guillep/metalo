@@ -13,6 +13,7 @@ basicCreateClass: aClassDefinition
 	
 	DangerousClassNotifier disableDuring: [
 		^ MLClassInstaller make: [ :builder |
+
 			builder
 					superclass: superclass;
 					name: aClassDefinition className;
