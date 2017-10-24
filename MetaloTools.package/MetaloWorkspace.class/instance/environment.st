@@ -3,9 +3,9 @@ environment
 
 	environment ifNotNil: [ ^ environment ].
 	
-	environment := MLWorkspaceEnvironment new
+	environment := MLWorkspaceCompilationScope new
 		workspace: self;
 		module: module;
-		parentEnvironment: (MLModuleEnvironment new module: module);
+		parentEnvironment: (MLModuleCompilerScope new module: module);
 		yourself.
 	^ environment

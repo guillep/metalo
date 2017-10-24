@@ -1,14 +1,13 @@
 {
-	"commentStamp" : "LucFabresse 10/24/2017 12:54",
+	"commentStamp" : "LucFabresse 10/24/2017 12:57",
 	"super" : "Object",
-	"category" : "Metalo-Integration",
+	"category" : "Metalo-Compilation",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"rpackage",
 		"module"
 	],
-	"name" : "MLRPackageLoader",
+	"name" : "MLModuleCompilerScope",
 	"type" : "normal"
 }

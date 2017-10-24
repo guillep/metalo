@@ -1,0 +1,1 @@
+When looking for references to a name, we need a way to detect superclass references 

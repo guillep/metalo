@@ -1,13 +1,16 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "LucFabresse 10/24/2017 13:02",
 	"super" : "Object",
 	"category" : "MetaloTools-Core",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"module"
+		"module",
+		"parentEnvironment",
+		"binding",
+		"workspace"
 	],
-	"name" : "MLModuleEnvironment",
+	"name" : "MLWorkspaceCompilationScope",
 	"type" : "normal"
 }
