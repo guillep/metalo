@@ -1,4 +1,5 @@
 rpackage-compatibility
 packageToModuleName: aPackageName
-
-	^ aPackageName copyReplaceAll: '-' with: ''
+	|className|
+	className := aPackageName copyReplaceAll: ' ' with: ''.
+	^ className copyReplaceAll: '-' with: ''

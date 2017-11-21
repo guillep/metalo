@@ -2,4 +2,7 @@
 MLBootstrap createFullModuleRegistry ] fork.
 
 
-MLBootstrap createFullModuleRegistry
+MLBootstrap createFullModuleRegistry.
+
+
+MLBootstrap createModuleManifestForPackageNamed: 'STON-Text support'

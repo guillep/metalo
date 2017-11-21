@@ -8,10 +8,13 @@ createFullModuleRegistry
 	RPackageOrganizer default packageNamesDo: [  :packageName |  
 		fullRegistry at: packageName put:  Smalltalk globals ].
 	
-	RPackageOrganizer default packageNamesDo: [  :packageName |  
-		packageName = #Kernel ifFalse: [ 
-			fullRegistry at: packageName put:  ((self newNamed: packageName) createModuleBoundTo: fullRegistry).
-			Transcript crShow: packageName
+	Transcript clear.
+	RPackageOrganizer default packagesDo: [  :package |  
+		((package packageName = #Kernel) or: [ package packageName = #_UnpackagedPackage ]) ifFalse: [ 
+			Smalltalk globals at: (MLBootstrap manifestNameForPackageName: package name) ifPresent: [ :packageDependenciesClass |
+				fullRegistry at: package packageName put:  (MLModule loadRPackage: package withImportDeclarations: packageDependenciesClass new imports).
+				Transcript crShow: package packageName
+			]
 			] ].
 
 	^ fullRegistry
