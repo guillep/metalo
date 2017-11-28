@@ -25,4 +25,6 @@ computePackageDependenciesOfPackageNamed: aPackageName
 			(dict at: globalPackageOwner ifAbsentPut: [ OrderedCollection new ])
 				add: globalName ].
 	dict removeKey: aPackageName ifAbsent: [].
-	^ dict
+	dict := dict associations
+		collect: [ :assoc | assoc key -> assoc value asArray ].
+	^ dict asDictionary 

@@ -1,4 +1,8 @@
 instance creation - from RPackage
 loadRPackage: anRPackage
 
-	^ self loadRPackage: anRPackage withImportDeclarations: #()
+	| dependencies |
+	
+	dependencies := MLBootstrap computePackageDependenciesOfPackageNamed: anRPackage packageName.
+	
+	^ self loadRPackage: anRPackage withImportDeclarations: dependencies

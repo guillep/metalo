@@ -1,15 +1,9 @@
 module-loading
 testCreateModuleFromRPackageWithDependencyAnalyzerImports
-
-	| rPackage loadedSystemSupportRulesModule rPackageName packageDependenciesClass |
-	rPackageName := 'System-Support-Rules'.
-	rPackage := RPackageOrganizer default packageNamed: rPackageName.
-
-	MLBootstrap createModuleManifestForPackageNamed: rPackageName.
 	
-	packageDependenciesClass := Smalltalk globals at: (MLBootstrap manifestNameForPackageName: rPackageName) asSymbol.
+	| loadedSystemSupportRulesModule |
 	
-	loadedSystemSupportRulesModule := MLModule loadRPackage: rPackage withImportDeclarations: packageDependenciesClass new imports.
+	loadedSystemSupportRulesModule := MLModule loadRPackageNamed: 'System-Support-Rules'.
 	
 	self deny: (loadedSystemSupportRulesModule hasImportNamed: #MLModule).
 	loadedSystemSupportRulesModule undeclaredNames isEmpty.

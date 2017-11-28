@@ -5,6 +5,5 @@ testLoadModuleIsNotBound
 	rPackage := RPackageOrganizer default packageNamed: 'Network-Kernel'.
 	loadedNetworkModule := MLModule loadRPackage: rPackage.
 	
-	dependentClassNames := (MLBootstrap computePackageDependenciesOfPackageNamed: rPackage name)
-		flatCollect: #yourself.
+	dependentClassNames := (MLBootstrap computePackageDependenciesOfPackageNamed: rPackage name) asDictionary values flatCollect: #yourself.
 	loadedNetworkModule undeclaredNames includesAll: dependentClassNames.
