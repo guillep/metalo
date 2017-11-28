@@ -1,4 +1,4 @@
-manifest generation
+dependencies computing
 computePackageDependenciesOfPackageNamed: aPackageName
 	| dict  |
 

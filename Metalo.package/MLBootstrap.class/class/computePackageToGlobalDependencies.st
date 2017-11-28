@@ -1,4 +1,4 @@
-manifest generation
+dependencies computing
 computePackageToGlobalDependencies
 	| global allGlobals globalUsersDict |
 	

@@ -1,4 +1,4 @@
-manifest generation
+dependencies computing
 computeModuleImportsOfPackageNamed: aPackageName
 	| dependencies imports  |
 

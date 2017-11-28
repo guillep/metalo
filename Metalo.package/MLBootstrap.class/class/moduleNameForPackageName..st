@@ -1,3 +1,3 @@
-manifest generation
+public API
 moduleNameForPackageName: aPackageName
 	^ MLModule packageToModuleName: aPackageName

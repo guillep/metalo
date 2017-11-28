@@ -1,8 +1,5 @@
-create module registry
-createFullModuleRegistry
-	"suppose that MetaloManifest have been created"
-	"self createAllManifests"
-	
+public API
+createFullModuleRegistry	
 	"self createFullModuleRegistry"
 	
 	| fullRegistry rPackagesToModularize |
@@ -18,12 +15,9 @@ createFullModuleRegistry
 		fullRegistry at: packageName put:  Smalltalk globals ].
 	
 	Transcript clear.
-	rPackagesToModularize do: [  :package |  
-			Smalltalk globals at: (MLBootstrap manifestNameForPackageName: package name) ifPresent: [ :packageDependenciesClass |
-				
-				fullRegistry at: package packageName put:  (MLModule loadRPackage: package withImportDeclarations: packageDependenciesClass new imports).
-				Transcript crShow: package packageName
-			]
+	rPackagesToModularize do: [  :packageName |  
+				fullRegistry at: packageName put:  (MLModule loadRPackageNamed: packageName).
+				Transcript crShow: packageName
 	] .
 
 	^ fullRegistry
