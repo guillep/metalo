@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
 	"super" : "Object",
-	"category" : "Metalo",
+	"category" : "MetaloTools",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "MetaloMetaloManifest",
+	"name" : "MetaloToolsMetaloManifest",
 	"type" : "normal"
 }

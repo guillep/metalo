@@ -1,4 +1,4 @@
-instanceCreation
+instance creation
 withEnvironment: aCollection 
 	
 	^ self new

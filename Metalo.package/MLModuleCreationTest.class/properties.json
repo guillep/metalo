@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "Luc 11/28/2017 13:08",
 	"super" : "MLModuleTest",
-	"category" : "Metalo-UnitTests",
+	"category" : "Metalo-Tests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

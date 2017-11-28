@@ -1,4 +1,4 @@
-examples
+initialize
 setupGlobalRegistry
 
 	MLModuleRegistry global

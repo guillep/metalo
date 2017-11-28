@@ -1,4 +1,4 @@
-instance-creation
+instance creation - from RPackage
 loadRPackage: anRPackage withImportDeclarations: imports
 
 	| module |

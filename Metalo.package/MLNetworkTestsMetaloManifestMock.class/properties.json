@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "Object",
-	"category" : "Metalo-IntegrationTests",
+	"category" : "Metalo-Tests-Integration",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

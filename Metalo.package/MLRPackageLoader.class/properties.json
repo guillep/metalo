@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "LucFabresse 10/24/2017 12:54",
 	"super" : "Object",
-	"category" : "Metalo-Integration",
+	"category" : "Metalo-Bootstrap",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

@@ -1,4 +1,4 @@
-as yet unclassified
+instance creation
 newNamed: aName fromRPackages: anRPackageCollection withImports: imports
 	
 	| moduleDefinition |

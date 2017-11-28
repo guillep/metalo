@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "Luc 11/21/2017 16:01",
 	"super" : "Object",
-	"category" : "Metalo-Core",
+	"category" : "Metalo-Bootstrap",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [

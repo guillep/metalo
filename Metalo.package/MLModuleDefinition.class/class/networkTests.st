@@ -1,4 +1,4 @@
-migration
+module examples
 networkTests
 	
 	^ MLModuleDefinition
