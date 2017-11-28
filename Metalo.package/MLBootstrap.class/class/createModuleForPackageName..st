@@ -1,5 +1,6 @@
 create module registry
 createModuleForPackageName: aPackageName
+	"this method supposes that the MetaloManifest has already been created"
 	
 	| className |
 	className := self manifestNameForPackageName: aPackageName.

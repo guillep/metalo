@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "Luc 11/28/2017 12:55",
 	"super" : "MLModuleTest",
 	"category" : "Metalo-UnitTests",
 	"classinstvars" : [ ],
@@ -8,6 +8,6 @@
 	"instvars" : [
 		"module"
 	],
-	"name" : "MLClassMigrationTest",
+	"name" : "MLClassMigrationDuringIncrementalDevelopmentTest",
 	"type" : "normal"
 }

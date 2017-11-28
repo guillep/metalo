@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "StephaneDucasse 3/15/2017 13:19",
 	"super" : "TestCase",
 	"category" : "Metalo-IntegrationTests",
 	"classinstvars" : [ ],
@@ -9,10 +9,8 @@
 		"testModule",
 		"networkModule",
 		"registry",
-		"networkCore",
-		"networkMIME",
-		"networkTests"
+		"networkCore"
 	],
-	"name" : "MLNetworkModuleIntegrationTest",
+	"name" : "MLModuleInvariantTestSKIPPED",
 	"type" : "normal"
 }

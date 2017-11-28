@@ -1,4 +1,6 @@
 testing
 definesName: aName
 	
-	^ self locallyDeclaredNames includesKey: aName
+	^ (classBindings includesKey: aName) or: [  
+			variableBindings  includesKey: aName ] 
+	

@@ -25,5 +25,4 @@ computePackageDependenciesOfPackageNamed: aPackageName
 			(dict at: globalPackageOwner ifAbsentPut: [ OrderedCollection new ])
 				add: globalName ].
 	dict removeKey: aPackageName ifAbsent: [].
-	(dict at: #Metalo ifAbsentPut: [ OrderedCollection new  ]) add: #MLModule.
 	^ dict
