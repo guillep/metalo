@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "LucFabresse 10/24/2017 08:32",
 	"super" : "Object",
-	"category" : "MetaloTools-Core",
+	"category" : "MetaloTools-Workspace",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

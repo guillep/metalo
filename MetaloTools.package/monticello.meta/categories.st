@@ -1,3 +1,3 @@
 SystemOrganization addCategory: #MetaloTools!
-SystemOrganization addCategory: #'MetaloTools-Core'!
-SystemOrganization addCategory: #'MetaloTools-Tests'!
+SystemOrganization addCategory: #'MetaloTools-Browser'!
+SystemOrganization addCategory: #'MetaloTools-Workspace'!

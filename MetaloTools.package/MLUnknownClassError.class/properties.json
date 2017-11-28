@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "Error",
-	"category" : "MetaloTools-Core",
+	"category" : "MetaloTools-Workspace",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

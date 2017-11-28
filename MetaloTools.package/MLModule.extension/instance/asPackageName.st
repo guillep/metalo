@@ -1,0 +1,3 @@
+*MetaloTools-Browser
+asPackageName
+	^name

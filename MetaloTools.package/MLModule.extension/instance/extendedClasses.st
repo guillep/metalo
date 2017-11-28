@@ -1,0 +1,3 @@
+*MetaloTools-Browser
+extendedClasses
+	^#()

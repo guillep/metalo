@@ -1,0 +1,3 @@
+accessing
+selectedPackage
+	^context lastSelectedPackage

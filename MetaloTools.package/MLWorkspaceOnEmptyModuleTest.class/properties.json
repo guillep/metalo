@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "TestCase",
-	"category" : "MetaloTools-Tests",
+	"category" : "MetaloTools-Workspace",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
