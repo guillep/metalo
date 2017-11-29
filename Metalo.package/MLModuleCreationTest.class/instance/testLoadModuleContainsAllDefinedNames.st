@@ -6,5 +6,4 @@ testLoadModuleContainsAllDefinedNames
 	loadedNetworkModule := MLModule loadRPackage: rPackage.
 	
 	rPackage definedClassNames do: [ :className | 
-		self assert: (loadedNetworkModule includesName: className)
-	]
+		self assert: (loadedNetworkModule includesName: className) ]

@@ -8,9 +8,10 @@ testCreateModuleFromRPackageWithDependencyAnalyzerImports
 	self deny: (loadedSystemSupportRulesModule hasImportNamed: #MLModule).
 	self assert: loadedSystemSupportRulesModule undeclaredNames isEmpty.
 	
-	#( AsClassRule ManifestSystemSupportRules ) do: [ :aClassName |
-		loadedSystemSupportRulesModule  definesClassNamed:  aClassName ].
+	#( AsClassRule ) do: [ :aClassName |
+		self assert: (loadedSystemSupportRulesModule  definesClassNamed:  aClassName) ].
 
-	#( PackageManifest ReNodeRewriteRule ) do: [ :notDefinedName |
-		loadedSystemSupportRulesModule  hasImportNamed:  notDefinedName ].
+	#( ReNodeRewriteRule ) do: [ :notDefinedName |
+		self assert: (loadedSystemSupportRulesModule  hasImportNamed:  notDefinedName) ].
+	
 	
