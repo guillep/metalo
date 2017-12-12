@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "MLSingleModuleTest",
+	"category" : "Metalo-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"undeclaredBinding",
+		"definedClass"
+	],
+	"name" : "MLModuleWithASingleUndeclaredSuperclassTest",
+	"type" : "normal"
+}

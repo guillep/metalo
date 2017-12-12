@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "MLModuleWithASingleClassTest",
+	"category" : "Metalo-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"method"
+	],
+	"name" : "MLModuleWithASingleUndeclaredMethodReferenceTest",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "MLSingleModuleTest",
+	"category" : "Metalo-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MLSingleEmptyModuleTest",
+	"type" : "normal"
+}

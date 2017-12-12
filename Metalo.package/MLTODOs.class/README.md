@@ -1,3 +1,16 @@
+Defines:
+
+- Life cycle of a Module
+-- 
+
+- Module API
+-- Module creation 
+-- Class definition
+-- Variable definition
+-- Imports declaration
+-- Method definition 
+-- Method extension definition 
+
 We should test:
 
  - If we have a declared variable and we remove it
