@@ -1,7 +1,12 @@
-Defines:
+Idea of Experiment: Use a Unit test that creates classes and ensure that it does not impact the system (isolation)
+
+- Code a StaticModuleChecker that analyses a module and ensures that it is closed i.e. only refers to defined, imported, ... things
+
+- extends TestRunner to run tests given a ModuleRegistery
+
+- execute tests but bound on a new SUnit module
 
 - Life cycle of a Module
--- 
 
 - Module API
 -- Module creation 
@@ -10,6 +15,7 @@ Defines:
 -- Imports declaration
 -- Method definition 
 -- Method extension definition 
+-- Reflexive API of a module i.e. specific compiler, class builder, class installer 
 
 We should test:
 
@@ -23,8 +29,6 @@ We should test:
    - and we remove the subclass
 
 Test all the same but with bindings
-
-Introduce class definition
 
 Undeclare ref  -> we use it as subclass
 Undeclared ref -> we use it as ref
