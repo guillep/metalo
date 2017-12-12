@@ -1,10 +1,11 @@
 {
-	"commentStamp" : "Luc 11/21/2017 16:01",
+	"commentStamp" : "LucFabresse 12/12/2017 14:11",
 	"super" : "Object",
 	"category" : "Metalo-Bootstrap",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [
+		"FullModuleRegistry",
 		"PackageDependenciesDict"
 	],
 	"instvars" : [ ],

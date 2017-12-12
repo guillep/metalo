@@ -1,13 +1,16 @@
 dependencies computing
 computePackageDependenciesOfPackageNamed: aPackageName
-	| dict  |
+	| dict  dependentClasses |
 
 	dict := Dictionary new.
-	(((DAPackageRelationGraph onPackagesNamed: {aPackageName})
+	dependentClasses := [ 
+		(((DAPackageRelationGraph onPackagesNamed: {aPackageName})
 		computeStaticDependencies;
 		classToPackage) keys
 		collect: [ :aClass | aClass theNonMetaClass name ])
-		do: [ :dependantName | 
+		 ] on: PotentialOutDatedDependencyWarning do: [ :w | w resume  ].
+	
+	dependentClasses do: [ :dependantName | 
 			| class |
 			class := Smalltalk globals at: dependantName asSymbol.
 			class isTrait

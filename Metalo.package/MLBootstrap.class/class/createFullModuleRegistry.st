@@ -2,9 +2,9 @@ public API
 createFullModuleRegistry	
 	"self createFullModuleRegistry"
 	
-	| fullRegistry rPackagesToModularize |
+	| rPackagesToModularize |
 	
-	fullRegistry := MLModuleRegistry new.
+	FullModuleRegistry := MLModuleRegistry new.
 	
 	rPackagesToModularize := RPackageOrganizer default packageNames asOrderedCollection.
 	rPackagesToModularize 
@@ -12,12 +12,12 @@ createFullModuleRegistry
 		remove: #_UnpackagedPackage. "because we do not know what is inside"
 	
 	(rPackagesToModularize, #Kernel) do: [  :packageName |  
-		fullRegistry at: packageName put:  Smalltalk globals ].
+		FullModuleRegistry at: packageName put:  Smalltalk globals ].
 	
 	Transcript clear.
 	rPackagesToModularize do: [  :packageName |  
-				fullRegistry at: packageName put:  (MLModule loadRPackageNamed: packageName).
+				FullModuleRegistry at: packageName put:  (MLModule loadRPackageNamed: packageName).
 				Transcript crShow: packageName
 	] .
 
-	^ fullRegistry
+	^ FullModuleRegistry
