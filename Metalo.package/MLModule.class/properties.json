@@ -7,7 +7,6 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"name",
-		"importedNameBindings",
 		"undeclaredBindings",
 		"imports",
 		"classBindings",

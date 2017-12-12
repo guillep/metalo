@@ -3,6 +3,8 @@ basicCreateClass: aClassDefinition superclass: aSuperclass
 	"Low level API.
 	Mainly used to create undefined classes"
 	
+	aClassDefinition traitComposition isEmpty ifFalse: [ Transcript crShow: 'TraitComposition missing for: ', aClassDefinition className ].
+	
 	DangerousClassNotifier disableDuring: [
 		^ MLClassInstaller make: [ :builder |
 			builder

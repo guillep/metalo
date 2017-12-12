@@ -5,26 +5,20 @@ basicCreateClass: aClassDefinition
 	superclassName := aClassDefinition superclassName.
 	superclass := superclassName = #nil ifFalse: [ | binding |
 		binding := self bindingOf: superclassName.
-		binding value ifNil: [ 
-			binding value: (self declareUndefinedClassNamed: superclassName).
-		].
-		binding value
-	].
+		"If the binding is nil it means that the name is not defined and we need to create an undeclared."
+		binding
+			ifNil: [ self declareUndefinedClassNamed: superclassName ]
+			ifNotNil: [ 
+				binding value
+					ifNil: [ 
+						"If the binding is not nil, and the value is nil it means that we have a non-class binding, and we need to create an undefined class for it."
+						binding
+							value: (self basicCreateUndefinedClassNamed: superclassName);
+							value ]
+					ifNotNil: [ 
+						"Otherwise we assume the binding value is a class and we use it"
+						self assert: binding value isBehavior.
+						binding value ] ] ].
 	
-	DangerousClassNotifier disableDuring: [
-		^ MLClassInstaller make: [ :builder |
-
-			builder
-					superclass: superclass;
-					name: aClassDefinition className;
-					layoutClass: (ObjectLayout layoutForType: aClassDefinition type);
-					slots: aClassDefinition instanceVariables;
-					sharedVariables: aClassDefinition classVariables;
-					sharedPools: aClassDefinition sharedPoolsString;
-					classSlots: aClassDefinition classInstanceVariables;
-					category: aClassDefinition category;
-					traitComposition: #() asTraitComposition; "Ignore the traits for now"
-					classTraitComposition: #() asTraitComposition; "Ignore the traits for now"
-					environment: self
-		]
-	]
+	^ self basicCreateClass: aClassDefinition superclass: superclass
+	

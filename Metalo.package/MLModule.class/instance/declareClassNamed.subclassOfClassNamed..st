@@ -1,14 +1,10 @@
 class creation
 declareClassNamed: aClassName subclassOfClassNamed: aSuperclassName
 	
-	| classCreated |
 	
-	self assertVariableNotDeclared: aClassName.
-	self assertNameNotImported: aClassName.
-	
-	classCreated := self
-		basicCreateClassNamed: aClassName
-		subclassOfClassNamed: aSuperclassName.
-
-	self at: aClassName put: classCreated.
-	^ classCreated
+	^ self declareClass: (MCClassDefinition
+			name: aClassName
+			superclassName: aSuperclassName
+			category: 'no category'
+			instVarNames: #( )
+			comment: 'no comments').

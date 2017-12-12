@@ -5,7 +5,7 @@ load
 	sortedClasses := (rpackage definedClasses
 		reject: [ :a | a isTrait ])
 		sorted: [ :a :b | (self numberOfDependenciesOf: a) < (self numberOfDependenciesOf: b)  ].
-	module createClasses: sortedClasses.
+	module declareClasses: sortedClasses.
 	
 	rpackage definedClasses do: [ :c | | definedMethods definedClassMethods | 
 		c isTrait ifFalse: [

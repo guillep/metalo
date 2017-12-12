@@ -1,13 +1,3 @@
 notifications
 classAdded: aClass inCategory: aCategory
-
-	aClass isUndefined
-		ifTrue: [ environment declareUndeclaredBinding:  aClass name with: aClass ]
-		ifFalse: [ 
-				" Install the new class in the system "
-				environment at: aClass name put: aClass ].
-	
-	aClass environment: environment.
-
-	" Inform superclass of new subclass "
-	aClass superclass addSubclass: aClass.
+	"we manage class addition at its module level, at declaration time in MLModule>>declareClass:"

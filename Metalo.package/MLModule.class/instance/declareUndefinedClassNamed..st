@@ -1,11 +1,15 @@
 class creation
 declareUndefinedClassNamed: aClassName
 	
-	^ self
-		basicCreateClass: (MCClassDefinition
-			name: aClassName
-			superclassName: nil
-			category: 'no category'
-			instVarNames: #( )
-			comment: 'no comments')
-		superclass: UndefinedClass
+	| classCreated |
+	self assertVariableNotDeclared: aClassName.
+	self assertNameNotImported: aClassName.
+	self assertNameNotLocallyDeclared: aClassName.
+	
+	classCreated := self basicCreateUndefinedClassNamed: aClassName.
+	
+	undeclaredBindings add: (MLUndeclaredBinding key: aClassName value: classCreated).
+	classCreated environment: self.
+	classCreated superclass addSubclass: classCreated.
+	
+	^ classCreated

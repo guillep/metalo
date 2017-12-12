@@ -6,4 +6,4 @@ bindingOf: aName
 		on: MLUnresolvedNameError
 		do: [ :err |  self importedBindingOf: aName ]]
 			on: NotFound
-			do: [ :err | self declareUndeclaredBinding: aName ]
+			do: [ :err | self undeclaredBindingOf: aName ]
