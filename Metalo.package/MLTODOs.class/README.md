@@ -1,4 +1,8 @@
 Idea of Experiment: Use a Unit test that creates classes and ensure that it does not impact the system (isolation)
+  - Slot
+  - MC
+  - Shift
+  - Traits
 
 - Code a StaticModuleChecker that analyses a module and ensures that it is closed i.e. only refers to defined, imported, ... things
 

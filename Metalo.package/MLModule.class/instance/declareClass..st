@@ -1,14 +1,10 @@
 class creation
 declareClass: aClassDefinition
 	
-	| classCreated |
+	| newClass |
 	self assertVariableNotDeclared: aClassDefinition className.
 	self assertNameNotImported: aClassDefinition className.
 
-	classCreated := self basicCreateClass: aClassDefinition.
-	
-	self at: aClassDefinition className put: classCreated.
-	classCreated environment: self.
-	classCreated superclass addSubclass: classCreated.
-
-	^ classCreated
+	newClass := self basicCreateClass: aClassDefinition inEnvironment: classBindings.
+	self undeclaredBindings removeKey: aClassDefinition className ifAbsent: [].
+	^ newClass

@@ -8,5 +8,3 @@ at: aName put: anObject
 	self environment removeKey: aName ifAbsent: [].
 	self environment add: (MLModuleBinding name: aName value: anObject).
 	newBinding := self environment bindingOf: aName.
-	
-	oldBinding redefineAs: newBinding

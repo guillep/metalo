@@ -1,5 +1,5 @@
 class creation
-basicCreateUndefinedClassNamed: aClassName
+basicCreateUndefinedClassNamed: aClassName inEnvironment: anInstallingEnvironment
 	
 	^ self
 		basicCreateClass: (MCClassDefinition
@@ -9,3 +9,4 @@ basicCreateUndefinedClassNamed: aClassName
 			instVarNames: #( )
 			comment: 'no comments')
 		superclass: UndefinedClass
+		inEnvironment: anInstallingEnvironment

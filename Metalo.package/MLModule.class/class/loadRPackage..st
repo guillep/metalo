@@ -1,4 +1,4 @@
-instance creation - from RPackage
+as yet unclassified
 loadRPackage: anRPackage
 
 	| dependencies |

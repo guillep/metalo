@@ -10,7 +10,8 @@
 		"undeclaredBindings",
 		"imports",
 		"classBindings",
-		"variableBindings"
+		"variableBindings",
+		"importsEnvironment"
 	],
 	"name" : "MLModule",
 	"type" : "normal"

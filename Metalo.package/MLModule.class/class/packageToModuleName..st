@@ -1,4 +1,4 @@
-rpackage-compatibility
+as yet unclassified
 packageToModuleName: aPackageName
 	|className|
 	className := aPackageName copyReplaceAll: ' ' with: ''.

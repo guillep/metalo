@@ -1,4 +1,4 @@
-instance creation
+as yet unclassified
 newNamed: aString
 	
 	^ self new

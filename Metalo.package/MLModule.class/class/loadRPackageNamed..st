@@ -1,4 +1,4 @@
-instance creation - from RPackage
+as yet unclassified
 loadRPackageNamed: rPackageName 
 		
 	| rPackage |
