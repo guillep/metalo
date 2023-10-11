@@ -1,1 +1,1 @@
-SystemOrganization addCategory: #BaselineOfMetalo!
+self packageOrganizer ensurePackage: #BaselineOfMetalo withTags: #()!
