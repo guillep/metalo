@@ -57,9 +57,13 @@ MLModule class >> topologicallySortClasses: classes [
 		| currentIterationToSort |
 		currentIterationToSort := leftToSort.
 		leftToSort := OrderedCollection new.
-		currentIterationToSort do: [ :e |
-			((classes includes: e superclass) not or: [
-				 sorted includes: e superclass ])
+		currentIterationToSort do: [ :e | | dependencies shouldSortClass |
+			dependencies := { e superclass }, e traitComposition traits.
+			shouldSortClass := dependencies allSatisfy: [ :d |
+				"The dependency is external or already defined, thus satisfied"
+				(classes includes: d) not or: [ sorted includes: d ]
+			].
+			shouldSortClass
 				ifTrue: [ sorted add: e ]
 				ifFalse: [ leftToSort add: e ] ] ].
 	^ sorted
@@ -100,18 +104,29 @@ MLModule >> at: aString put: aValue [
 	^ nameRegistry add: (GlobalVariable key: aString value: aValue)
 ]
 
+{ #category : 'compiler' }
+MLModule >> compiler [
+
+	^ OpalCompiler new
+		  environment: self;
+		  yourself
+]
+
 { #category : 'class-installation' }
 MLModule >> createClassFromDefinition: aClassDefinition [
 
-	| superclass builder newClass |
-	superclass := self lookupName: aClassDefinition superclass name.
+	| superclass builder newClass newComposition |
+
+	aClassDefinition superclass ifNotNil: [
+		superclass := self lookupName: aClassDefinition superclass name ].
+	newComposition := self evaluate: aClassDefinition traitComposition traitCompositionExpression.
 
 	builder := MLClassBuilder new
 		           superclass: superclass;
 		           name: aClassDefinition name;
 		           slots: aClassDefinition slots;
 		           classSlots: aClassDefinition class slots;
-		           classTraits: aClassDefinition traitComposition;
+		           classTraits: newComposition;
 		           environment: self;
 		           yourself.
 
@@ -119,6 +134,12 @@ MLModule >> createClassFromDefinition: aClassDefinition [
 	newClass := builder build.
 	self at: aClassDefinition name put: newClass.
 	^ newClass
+]
+
+{ #category : 'accessing' }
+MLModule >> evaluate: aString [
+
+	^ self compiler evaluate: aString
 ]
 
 { #category : 'package - access from class' }
@@ -135,8 +156,12 @@ MLModule >> initialize [
 ]
 
 { #category : 'name-resolution' }
-MLModule >> lookupName: aString [ 
-	
+MLModule >> lookupName: aString [
+
+	1haltIf: [aString = 'self' ].
+	PseudoVariable lookupDictionary
+		at: aString
+		ifPresent: [ :found | ^ found ].
 	^ nameResolver lookupName: aString
 ]
 
@@ -151,6 +176,10 @@ MLModule >> lookupVar: aString [
 
 	"Compiler compatibility"
 	| binding |
+	PseudoVariable lookupDictionary
+		at: aString
+		ifPresent: [ :found | ^ found ].
+	
 	binding := nameRegistry bindingOf: aString.
 	binding ifNotNil: [ ^ binding ].
 	
