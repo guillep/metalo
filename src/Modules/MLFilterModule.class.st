@@ -1,56 +1,76 @@
 Class {
-	#name : 'MLFilterEnvironment',
+	#name : 'MLFilterModule',
 	#superclass : 'Object',
 	#instVars : [
 		'environment',
-		'acceptedNames'
+		'acceptedNames',
+		'name'
 	],
 	#category : 'Modules',
 	#package : 'Modules'
 }
 
 { #category : 'instance creation' }
-MLFilterEnvironment class >> on: anEnvironment [
+MLFilterModule class >> on: anEnvironment named: aName [
 
 	^ self new
+		  name: aName;
 		  environment: anEnvironment;
 		  yourself
 ]
 
 { #category : 'accessing' }
-MLFilterEnvironment >> acceptedNames [
+MLFilterModule >> acceptedNames [
 
 	^ acceptedNames
 ]
 
 { #category : 'lookup' }
-MLFilterEnvironment >> bindingOf: aString [
+MLFilterModule >> bindingOf: aString [
 
 	(acceptedNames includes: aString) ifFalse: [ ^ nil ].
 	^ environment bindingOf: aString
 ]
 
 { #category : 'accessing' }
-MLFilterEnvironment >> environment [
+MLFilterModule >> classes [
+	
+	^ acceptedNames collect: [ :n | environment lookupName: n ] thenSelect: [ :e | e isClass ]
+]
+
+{ #category : 'accessing' }
+MLFilterModule >> environment [
 
 	^ environment
 ]
 
 { #category : 'accessing' }
-MLFilterEnvironment >> environment: anObject [
+MLFilterModule >> environment: anObject [
 
 	environment := anObject
 ]
 
 { #category : 'as yet unclassified' }
-MLFilterEnvironment >> filterName: aName [
+MLFilterModule >> filterName: aName [
 
 	acceptedNames add: aName
 ]
 
 { #category : 'as yet unclassified' }
-MLFilterEnvironment >> initialize [
+MLFilterModule >> initialize [
 
 	super initialize.
 	acceptedNames := OrderedCollection new
+]
+
+{ #category : 'accessing' }
+MLFilterModule >> name [
+	
+	^ name
+]
+
+{ #category : 'accessing' }
+MLFilterModule >> name: anObject [
+
+	name := anObject
 ]

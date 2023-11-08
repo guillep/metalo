@@ -61,3 +61,9 @@ MLListEnvironment >> lookupVar: aString [
 		(e bindingOf: aString) ifNotNil: [ :found | ^ found ] ].
 	^ nil
 ]
+
+{ #category : 'accessing' }
+MLListEnvironment >> modules [
+	
+	^ environments
+]

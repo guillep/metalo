@@ -1,31 +1,31 @@
 Class {
-	#name : 'MLSystemEnvironment',
+	#name : 'MLSystemModule',
 	#superclass : 'Object',
 	#category : 'Modules',
 	#package : 'Modules'
 }
 
 { #category : 'lookup' }
-MLSystemEnvironment >> bindingOf: aString [ 
+MLSystemModule >> bindingOf: aString [ 
 	
 	^ Smalltalk globals bindingOf: aString
 ]
 
 { #category : 'name-resolution' }
-MLSystemEnvironment >> lookupName: aString [ 
+MLSystemModule >> lookupName: aString [ 
 	
 	1haltIf: [ aString = 'self' ].
 	^ Smalltalk globals at: aString ifAbsent: [ self error: 'WAT' ]
 ]
 
 { #category : 'name-resolution' }
-MLSystemEnvironment >> lookupName: aString ifAbsent: aFullBlockClosure [ 
+MLSystemModule >> lookupName: aString ifAbsent: aFullBlockClosure [ 
 	
 	^ Smalltalk globals at: aString ifAbsent: aFullBlockClosure
 ]
 
 { #category : 'lookup' }
-MLSystemEnvironment >> lookupVar: aString [ 
+MLSystemModule >> lookupVar: aString [ 
 	
 	^ self bindingOf: aString
 ]
