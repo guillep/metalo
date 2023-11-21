@@ -137,6 +137,12 @@ MLModule >> asDictionary [
 	^ nameRegistry
 ]
 
+{ #category : 'converting' }
+MLModule >> asRingDefinition [
+	
+	^ RGPackageDefinition named: self name asSymbol
+]
+
 { #category : 'accessing' }
 MLModule >> associationAt: aString ifAbsent: aFullBlockClosure [ 
 	
@@ -306,6 +312,12 @@ MLModule >> organization [
 ]
 
 { #category : 'private' }
+MLModule >> packageForProtocol: aProtocol from: aClass [ 
+
+	^ self
+]
+
+{ #category : 'private' }
 MLModule >> packageOf: aClass [ 
 	
 	"Announcements ask funny things"
@@ -323,5 +335,17 @@ MLModule >> packageOfClassNamed: aString [
 MLModule >> tagOf: aClass [ 
 	
 	"Wat"
+	^ UndefinedPackageTag undefinedPackage: self
+]
+
+{ #category : 'tests' }
+MLModule >> undefinedPackage [
+
+	^ self
+]
+
+{ #category : 'tests' }
+MLModule >> undefinedTag [
+
 	^ UndefinedPackageTag undefinedPackage: self
 ]
