@@ -230,6 +230,12 @@ MLModule >> createClassFromDefinition: aClassDefinition [
 	^ newClass
 ]
 
+{ #category : 'system integration' }
+MLModule >> ensurePackageOfExtensionProtocol: aProtocol [ 
+	
+	^ nil
+]
+
 { #category : 'accessing' }
 MLModule >> evaluate: aString [
 
@@ -315,6 +321,12 @@ MLModule >> organization [
 MLModule >> packageForProtocol: aProtocol from: aClass [ 
 
 	^ self
+]
+
+{ #category : 'system integration' }
+MLModule >> packageMatchingExtensionName: aString [ 
+	
+	^ nil
 ]
 
 { #category : 'private' }

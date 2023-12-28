@@ -26,6 +26,12 @@ MLClassBuilderEnvironmentAdapter >> bindingOf: aString [
 	^ module bindingOf: aString
 ]
 
+{ #category : 'accessing' }
+MLClassBuilderEnvironmentAdapter >> codeChangeAnnouncer [
+	
+	^ Announcer new
+]
+
 { #category : 'testing' }
 MLClassBuilderEnvironmentAdapter >> hasBindingThatBeginsWith: aString [ 
 	
