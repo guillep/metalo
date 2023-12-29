@@ -13,13 +13,33 @@ Class {
 { #category : 'instance creation' }
 MLModule class >> fromPackage: aPackage except: namesToFilterOut nameResolver: aNameResolver [
 
-	| thePackage classDefinitions module |
-	thePackage := aPackage asPackage.
-	classDefinitions := thePackage definedClasses reject: [ :e |
+	^ self
+		  named: aPackage asPackage name
+		  fromDefinition: aPackage asPackage
+		  except: namesToFilterOut
+		  nameResolver: aNameResolver
+]
+
+{ #category : 'instance creation' }
+MLModule class >> fromPackage: aPackage nameResolver: aNameResolver [
+
+	^ self
+		  fromPackage: aPackage
+		  except: #(  )
+		  nameResolver: aNameResolver
+]
+
+{ #category : 'instance creation' }
+MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesToFilterOut nameResolver: aNameResolver [
+
+	| classDefinitions module errors |
+	errors := OrderedCollection new.
+
+	classDefinitions := aPackageDefinition definedClasses reject: [ :e |
 		                    namesToFilterOut includes: e name ].
 	classDefinitions := self topologicallySortClasses: classDefinitions.
 
-	module := self newNamed: thePackage name.
+	module := self newNamed: aName.
 	module nameResolver: aNameResolver.
 
 	"First define all names in the namespace"
@@ -27,23 +47,28 @@ MLModule class >> fromPackage: aPackage except: namesToFilterOut nameResolver: a
 
 	"Then compile all methods"
 	classDefinitions do: [ :e |
-		(thePackage definedMethodsForClass: e) do: [ :m |
+		(aPackageDefinition definedMethodsForClass: e isMeta: false) do: [
+			:m |
+			[
 			| owner |
-			owner := module at: e name.
+			owner := module lookupName: e name.
 			owner compiler
 				compiledMethodClass: (module
 						 lookupName: #CompiledMethod
 						 ifAbsent: [ NotFound signalFor: #CompiledMethod ]);
 				bindings: module;
 				class: owner;
-				source: m sourceCode;
+				source: m source;
 				requestor: nil;
 				failBlock: nil;
 				"no failblock if no requestor"permitUndeclared: false;
 				"compatibility: permit undeclared if no requestor"logged: false;
-				install ].
+				install ]
+				on: Error
+				do: [ :e | errors add: e freeze ] ].
 
-		(thePackage definedMethodsForClass: e class) do: [ :m |
+		(aPackageDefinition definedMethodsForClass: e isMeta: true) do: [ :m |
+			[
 			| owner |
 			owner := (module at: e name) class.
 			owner compiler
@@ -52,21 +77,23 @@ MLModule class >> fromPackage: aPackage except: namesToFilterOut nameResolver: a
 						 ifAbsent: [ NotFound signalFor: #CompiledMethod ]);
 				bindings: module;
 				class: owner;
-				source: m sourceCode;
+				source: m source;
 				requestor: nil;
 				failBlock: nil;
 				"no failblock if no requestor"permitUndeclared: false;
 				"compatibility: permit undeclared if no requestor"logged: false;
-				install ] ].
+				install ]
+				on: Error
+				do: [ :e | errors add: e freeze ] ] ].
 
 	"Then compile all methods"
-	thePackage extensionMethods do: [ :e |
+	aPackageDefinition extensionMethods do: [ :e |
+		[
 		| owner |
 		owner := module
-			         lookupName: e methodClass instanceSide name
-			         ifAbsent: [
-			         NotFound signalFor: e methodClass instanceSide name ].
-		e isClassSide ifTrue: [ owner := owner class ].
+			         lookupName: e className
+			         ifAbsent: [ NotFound signal: e className ].
+		e classIsMeta ifTrue: [ owner := owner classSide ].
 		"Ignore conflicting extensions for now"
 		(owner includesSelector: e selector) ifFalse: [
 			owner compiler
@@ -74,22 +101,34 @@ MLModule class >> fromPackage: aPackage except: namesToFilterOut nameResolver: a
 						 lookupName: #CompiledMethod
 						 ifAbsent: [ NotFound signalFor: #CompiledMethod ]);
 				bindings: module;
+				environment: module;
 				class: owner;
-				source: e sourceCode;
+				source: e source;
 				requestor: nil;
 				failBlock: nil;
 				"no failblock if no requestor"permitUndeclared: false;
 				"compatibility: permit undeclared if no requestor"logged: false;
-				install ] ].
+				install ] ]
+			on: Error
+			do: [ :e | errors add: e freeze ] ].
 
+	module classes
+		select: [ :e | e class includesLocalSelector: #initialize ]
+		thenDo: [ :e | e initialize ].
+
+	errors ifNotEmpty: [
+		MLModuleCompilationError new
+			errors: errors;
+			signal ].
 	^ module
 ]
 
 { #category : 'instance creation' }
-MLModule class >> fromPackage: aPackage nameResolver: aNameResolver [
+MLModule class >> named: aName fromDefinition: aPackageDefinition nameResolver: aNameResolver [
 
 	^ self
-		  fromPackage: aPackage
+		  named: aName
+		  fromDefinition: aPackageDefinition
 		  except: #(  )
 		  nameResolver: aNameResolver
 ]
@@ -106,7 +145,9 @@ MLModule class >> newNamed: aString [
 MLModule class >> topologicallySortClasses: classes [
 
 	| leftToSort sorted |
-	leftToSort := classes.
+	
+	^ MCDependencySorter sortItems: classes
+	"leftToSort := classes.
 	sorted := OrderedCollection new.
 
 	[ leftToSort notEmpty ] whileTrue: [
@@ -116,13 +157,13 @@ MLModule class >> topologicallySortClasses: classes [
 		currentIterationToSort do: [ :e | | dependencies shouldSortClass |
 			dependencies := { e superclass }, e traitComposition traits.
 			shouldSortClass := dependencies allSatisfy: [ :d |
-				"The dependency is external or already defined, thus satisfied"
+				""The dependency is external or already defined, thus satisfied""
 				(classes includes: d) not or: [ sorted includes: d ]
 			].
 			shouldSortClass
 				ifTrue: [ sorted add: e ]
 				ifFalse: [ leftToSort add: e ] ] ].
-	^ sorted
+	^ sorted"
 ]
 
 { #category : 'adding' }
@@ -174,8 +215,9 @@ MLModule >> at: aString put: aValue [
 
 { #category : 'name-resolution' }
 MLModule >> bindingOf: aName [
-
-	^ nameRegistry bindingOf: aName
+	| binding |
+	binding := nameRegistry bindingOf: aName.
+	^ binding ifNil: [ nameResolver lookupVar: aName ]
 ]
 
 { #category : 'accessing' }
@@ -197,25 +239,17 @@ MLModule >> createClassFromDefinition: aClassDefinition [
 
 	| superclass builder newClass newComposition layoutclass |
 	aClassDefinition superclass ifNotNil: [
-		superclass := self
-			              lookupName: aClassDefinition superclass name
-			              ifAbsent: [
-			              NotFound signalFor: aClassDefinition superclass name ] ].
+		superclass := self lookupName: aClassDefinition superclassName ].
 	newComposition := self evaluate:
-		                  aClassDefinition traitComposition
-			                  traitCompositionExpression.
-	layoutclass := self
-		               lookupName: aClassDefinition classLayout class name
-		               ifAbsent: [
-		               NotFound signalFor:
-			               aClassDefinition classLayout class name ].
+		                  aClassDefinition traitCompositionString.
+	layoutclass := self lookupName: aClassDefinition layoutClassName.
 
 	builder := MLClassBuilder new
 		           superclass: superclass;
 		           layoutClass: layoutclass;
 		           name: aClassDefinition name;
-		           slots: aClassDefinition slots;
-		           classSlots: aClassDefinition class slots;
+		           slots: aClassDefinition instVarNames;
+		           classSlots: aClassDefinition classInstanceVariables;
 		           classTraits: newComposition;
 		           sharedVariablesFromString:
 			           aClassDefinition classVariablesString;
@@ -270,11 +304,23 @@ MLModule >> lookupName: aString [
 { #category : 'name-resolution' }
 MLModule >> lookupName: aString ifAbsent: absentBlock [
 
+	1 haltIf: [ aString = 'XMLSmallIntegerReader' ].
 	PseudoVariable lookupDictionary
 		at: aString
 		ifPresent: [ :found | ^ found ].
 	nameRegistry at: aString ifPresent: [ :found | ^ found ].
 	^ nameResolver lookupName: aString ifAbsent: absentBlock
+]
+
+{ #category : 'name-resolution' }
+MLModule >> lookupName: aString ifPresent: aBlock [
+
+1 haltIf: [ aString = 'XMLSmallIntegerReader' ].
+	PseudoVariable lookupDictionary
+		at: aString
+		ifPresent: [ :found | ^ aBlock value: found ].
+	nameRegistry at: aString ifPresent: [ :found | ^ aBlock value: found ].
+	^ nameResolver lookupName: aString ifAbsent: [ nil ]
 ]
 
 { #category : 'lookup' }
@@ -341,6 +387,12 @@ MLModule >> packageOfClassNamed: aString [
 	
 	"?"
 	^ self
+]
+
+{ #category : 'accessing' }
+MLModule >> printOn: aStream [
+
+	aStream << self class name << '(' << name << ')'
 ]
 
 { #category : 'class tags' }

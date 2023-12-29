@@ -22,6 +22,12 @@ MLListEnvironment >> add: anEnvironment [
 	environments addFirst: anEnvironment
 ]
 
+{ #category : 'lookup' }
+MLListEnvironment >> bindingOf: aString [
+
+	^ self lookupVar: aString
+]
+
 { #category : 'accessing' }
 MLListEnvironment >> environments [
 

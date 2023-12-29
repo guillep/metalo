@@ -63,6 +63,13 @@ MLFilterModule >> initialize [
 	acceptedNames := OrderedCollection new
 ]
 
+{ #category : 'name-resolution' }
+MLFilterModule >> lookupName: aString ifPresent: aFullBlockClosure [
+
+	(acceptedNames includes: aString) ifFalse: [ ^ nil ].
+	^ environment at: aString
+]
+
 { #category : 'accessing' }
 MLFilterModule >> name [
 	

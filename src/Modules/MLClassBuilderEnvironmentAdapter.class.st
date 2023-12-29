@@ -20,6 +20,12 @@ MLClassBuilderEnvironmentAdapter >> at: aString ifAbsent: aFullBlockClosure [
 	^ module lookupName: aString ifAbsent: aFullBlockClosure
 ]
 
+{ #category : 'accessing' }
+MLClassBuilderEnvironmentAdapter >> at: aString put: anObject [
+
+	^ module at: aString put: anObject
+]
+
 { #category : 'binding' }
 MLClassBuilderEnvironmentAdapter >> bindingOf: aString [ 
 	
