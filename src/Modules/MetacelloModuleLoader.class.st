@@ -1,6 +1,6 @@
 Class {
 	#name : 'MetacelloModuleLoader',
-	#superclass : 'Object',
+	#superclass : 'MetacelloMonticelloLoader',
 	#instVars : [
 		'moduleRegistry',
 		'engine'
@@ -15,22 +15,12 @@ MetacelloModuleLoader >> engine: aMetacelloScriptEngine [
 ]
 
 { #category : 'loading' }
-MetacelloModuleLoader >> fetchPackageDirective: aMetacelloPackageLoadDirective [
-
-	| repository allResolvedReferences |
-	repository := self repositoriesFrom:
-		              aMetacelloPackageLoadDirective repositorySpecs.
-	allResolvedReferences := repository fetchPackageNamed:
-		                         aMetacelloPackageLoadDirective spec name
-]
-
-{ #category : 'loading' }
 MetacelloModuleLoader >> loadAtomicPackageDirectives: packageDirectives [
 	"Each package directive can specify many repositorySpecs.
 	Find the first one that defines the package (assumming they all are equivalent) and use that."
 
 	| model snapshot module bootstrap environment kernel |
-	packageDirectives size > 1 ifTrue: [ self halt ].
+	packageDirectives size > 1 ifTrue: [ self error ].
 
 	model := MCVersionLoader new.
 
@@ -63,12 +53,6 @@ MetacelloModuleLoader >> loadAtomicPackageDirectives: packageDirectives [
 			, e repositorySpecs first description ]
 ]
 
-{ #category : 'loading' }
-MetacelloModuleLoader >> loadPackageDirective: aMetacelloPackageLoadDirective [
-
-	self loadAtomicPackageDirectives: { aMetacelloPackageLoadDirective }
-]
-
 { #category : 'accessing' }
 MetacelloModuleLoader >> lookupProjectClassNamed: aString [ 
 	
@@ -84,15 +68,4 @@ MetacelloModuleLoader >> moduleRegistry [
 MetacelloModuleLoader >> moduleRegistry: aMLModuleRegistry [
 
 	moduleRegistry := aMLModuleRegistry
-]
-
-{ #category : 'repositories' }
-MetacelloModuleLoader >> repositoriesFrom: aMetacelloMVRepositorySpecs [
-
-	aMetacelloMVRepositorySpecs size = 1 ifTrue: [
-		^ aMetacelloMVRepositorySpecs first createRepository ].
-
-	^ MetacelloRepositoryGroup onRepositories:
-		  (aMetacelloMVRepositorySpecs collect: [ :aSpec |
-			   aSpec createRepository ])
 ]

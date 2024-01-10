@@ -43,7 +43,10 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 	module nameResolver: aNameResolver.
 
 	"First define all names in the namespace"
-	classDefinitions do: [ :e | module createClassFromDefinition: e ].
+	classDefinitions do: [ :e |
+		[ module createClassFromDefinition: e ]
+			on: Error
+			do: [ :e | errors add: e freeze ] ].
 
 	"Then compile all methods"
 	classDefinitions do: [ :e |
@@ -208,6 +211,12 @@ MLModule >> at: aString ifAbsent: aFullBlockClosure [
 ]
 
 { #category : 'name-resolution' }
+MLModule >> at: aString ifPresent: aFullBlockClosure [ 
+	
+	^ nameRegistry at: aString ifPresent: aFullBlockClosure
+]
+
+{ #category : 'name-resolution' }
 MLModule >> at: aString put: aValue [
 
 	^ nameRegistry add: (GlobalVariable key: aString value: aValue)
@@ -239,10 +248,16 @@ MLModule >> createClassFromDefinition: aClassDefinition [
 
 	| superclass builder newClass newComposition layoutclass |
 	aClassDefinition superclass ifNotNil: [
-		superclass := self lookupName: aClassDefinition superclassName ].
+		superclass := self
+			              lookupName: aClassDefinition superclassName
+			              ifAbsent: [
+			              NotFound signal: aClassDefinition superclassName ] ].
 	newComposition := self evaluate:
 		                  aClassDefinition traitCompositionString.
-	layoutclass := self lookupName: aClassDefinition layoutClassName.
+	layoutclass := self
+		               lookupName: aClassDefinition layoutClassName
+		               ifAbsent: [
+		               NotFound signal: aClassDefinition layoutClassName ].
 
 	builder := MLClassBuilder new
 		           superclass: superclass;
@@ -304,7 +319,6 @@ MLModule >> lookupName: aString [
 { #category : 'name-resolution' }
 MLModule >> lookupName: aString ifAbsent: absentBlock [
 
-	1 haltIf: [ aString = 'XMLSmallIntegerReader' ].
 	PseudoVariable lookupDictionary
 		at: aString
 		ifPresent: [ :found | ^ found ].
@@ -315,11 +329,12 @@ MLModule >> lookupName: aString ifAbsent: absentBlock [
 { #category : 'name-resolution' }
 MLModule >> lookupName: aString ifPresent: aBlock [
 
-1 haltIf: [ aString = 'XMLSmallIntegerReader' ].
 	PseudoVariable lookupDictionary
 		at: aString
 		ifPresent: [ :found | ^ aBlock value: found ].
-	nameRegistry at: aString ifPresent: [ :found | ^ aBlock value: found ].
+	nameRegistry
+		at: aString
+		ifPresent: [ :found | ^ aBlock value: found ].
 	^ nameResolver lookupName: aString ifAbsent: [ nil ]
 ]
 

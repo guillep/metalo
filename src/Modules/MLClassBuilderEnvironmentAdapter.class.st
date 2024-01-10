@@ -21,6 +21,12 @@ MLClassBuilderEnvironmentAdapter >> at: aString ifAbsent: aFullBlockClosure [
 ]
 
 { #category : 'accessing' }
+MLClassBuilderEnvironmentAdapter >> at: aString ifPresent: aFullBlockClosure [ 
+	
+	^ module at: aString ifPresent: aFullBlockClosure
+]
+
+{ #category : 'accessing' }
 MLClassBuilderEnvironmentAdapter >> at: aString put: anObject [
 
 	^ module at: aString put: anObject

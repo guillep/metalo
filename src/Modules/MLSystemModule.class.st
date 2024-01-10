@@ -12,9 +12,8 @@ MLSystemModule >> bindingOf: aString [
 ]
 
 { #category : 'name-resolution' }
-MLSystemModule >> lookupName: aString [ 
-	
-	1haltIf: [ aString = 'self' ].
+MLSystemModule >> lookupName: aString [
+
 	^ Smalltalk globals at: aString ifAbsent: [ self error: 'WAT' ]
 ]
 
