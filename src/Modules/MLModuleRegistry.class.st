@@ -8,6 +8,12 @@ Class {
 	#package : 'Modules'
 }
 
+{ #category : 'accessing' }
+MLModuleRegistry >> hasModuleNamed: aString [ 
+	
+	^ moduleDictionary includesKey: aString asSymbol
+]
+
 { #category : 'initialization' }
 MLModuleRegistry >> initialize [
 
@@ -27,6 +33,12 @@ MLModuleRegistry >> lookupName: aString [
 MLModuleRegistry >> moduleNamed: aString [ 
 	
 	^ moduleDictionary at: aString asSymbol
+]
+
+{ #category : 'accessing' }
+MLModuleRegistry >> modules [
+	
+	^ moduleDictionary values
 ]
 
 { #category : 'registry' }

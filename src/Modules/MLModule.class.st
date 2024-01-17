@@ -182,6 +182,14 @@ MLModule >> asDictionary [
 ]
 
 { #category : 'converting' }
+MLModule >> asMCOrganizationDefinition [
+
+	^ MCOrganizationDefinition
+		  packageName: self name
+		  tagNames: self tagNames
+]
+
+{ #category : 'converting' }
 MLModule >> asRingDefinition [
 	
 	^ RGPackageDefinition named: self name asSymbol
@@ -279,6 +287,12 @@ MLModule >> createClassFromDefinition: aClassDefinition [
 	^ newClass
 ]
 
+{ #category : 'accessing' }
+MLModule >> definedClasses [
+	
+	^ self classes
+]
+
 { #category : 'system integration' }
 MLModule >> ensurePackageOfExtensionProtocol: aProtocol [ 
 	
@@ -355,6 +369,12 @@ MLModule >> lookupVar: aString [
 ]
 
 { #category : 'accessing' }
+MLModule >> methods [
+	
+	^ self classes flatCollect: [ :e | e methods ]
+]
+
+{ #category : 'accessing' }
 MLModule >> name [
 	^ name
 ]
@@ -408,6 +428,12 @@ MLModule >> packageOfClassNamed: aString [
 MLModule >> printOn: aStream [
 
 	aStream << self class name << '(' << name << ')'
+]
+
+{ #category : 'accessing' }
+MLModule >> tagNames [
+
+	^ #(  )
 ]
 
 { #category : 'class tags' }

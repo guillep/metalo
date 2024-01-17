@@ -22,7 +22,12 @@ MLModuleBrowser >> connectPresenters [
 		e ifNotNil: [ methodList items: (e methods sorted: [ :a :b | a selector < b selector ]) ] ].
 	
 	methodList whenSelectedItemChangedDo: [ :e |
-		e ifNotNil: [ codePresenter text: e sourceCode ] ]
+		e ifNotNil: [ 
+			codePresenter beForMethod: e.
+			codePresenter text: e sourceCode ] ].
+	
+	codePresenter whenSubmitDo: [ :text |
+		classList selectedItem compile: codePresenter text ].
 ]
 
 { #category : 'initialization' }
