@@ -61,6 +61,7 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 						 ifAbsent: [ NotFound signalFor: #CompiledMethod ]);
 				bindings: module;
 				class: owner;
+				protocol: m protocol;
 				source: m source;
 				requestor: nil;
 				failBlock: nil;
@@ -80,6 +81,7 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 						 ifAbsent: [ NotFound signalFor: #CompiledMethod ]);
 				bindings: module;
 				class: owner;
+				protocol: m protocol;
 				source: m source;
 				requestor: nil;
 				failBlock: nil;
@@ -106,6 +108,7 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 				bindings: module;
 				environment: module;
 				class: owner;
+				protocol: e protocol;
 				source: e source;
 				requestor: nil;
 				failBlock: nil;
