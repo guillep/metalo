@@ -1,15 +1,18 @@
 Class {
 	#name : 'MLModuleBrowser',
 	#superclass : 'SpPresenter',
+	#classTraits : '{} + TraitedClass',
 	#instVars : [
 		'moduleTree',
 		'classList',
 		'methodList',
 		'codePresenter',
-		'moduleEnvironment'
+		'moduleEnvironment',
+		'moduleActionBar'
 	],
-	#category : 'Modules',
-	#package : 'Modules'
+	#category : 'Modules-UI',
+	#package : 'Modules',
+	#tag : 'UI'
 }
 
 { #category : 'initialization' }
@@ -34,8 +37,13 @@ MLModuleBrowser >> connectPresenters [
 MLModuleBrowser >> defaultLayout [
 
 	^ SpBoxLayout newVertical
+		  spacing: 5;
 		  add: (SpBoxLayout newHorizontal
-				   add: moduleTree;
+				   spacing: 5;
+				   add: (SpBoxLayout newVertical
+						    add: moduleActionBar expand: false;
+						    add: moduleTree;
+						    yourself);
 				   add: classList;
 				   add: methodList;
 				   yourself);
@@ -46,15 +54,20 @@ MLModuleBrowser >> defaultLayout [
 { #category : 'initialization' }
 MLModuleBrowser >> initializePresenters [
 
+	moduleActionBar := self newActionBar.
+	moduleActionBar add: (self newButton
+			 label: 'asd';
+			 action: [  ];
+			 yourself).
 	moduleTree := self newTree.
 	moduleTree display: [ :e | e name ].
-	
+
 	classList := self newList.
 	classList display: [ :e | e name ].
-	
+
 	methodList := self newList.
 	methodList display: [ :e | e selector ].
-	
+
 	codePresenter := self newCode
 ]
 
