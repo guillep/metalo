@@ -56,9 +56,7 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 			| owner |
 			owner := module lookupName: e name.
 			owner compiler
-				compiledMethodClass: (module
-						 lookupName: #CompiledMethod
-						 ifAbsent: [ NotFound signalFor: #CompiledMethod ]);
+				compiledMethodClass: (module lookupNameChecked: #CompiledMethod);
 				bindings: module;
 				class: owner;
 				protocol: m protocol;
@@ -76,9 +74,7 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 			| owner |
 			owner := (module at: e name) class.
 			owner compiler
-				compiledMethodClass: (module
-						 lookupName: #CompiledMethod
-						 ifAbsent: [ NotFound signalFor: #CompiledMethod ]);
+				compiledMethodClass: (module lookupNameChecked: #CompiledMethod);
 				bindings: module;
 				class: owner;
 				protocol: m protocol;
@@ -95,16 +91,12 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 	aPackageDefinition extensionMethods do: [ :e |
 		[
 		| owner |
-		owner := module
-			         lookupName: e className
-			         ifAbsent: [ NotFound signal: e className ].
+		owner := module lookupNameChecked: e className.
 		e classIsMeta ifTrue: [ owner := owner classSide ].
 		"Ignore conflicting extensions for now"
 		(owner includesSelector: e selector) ifFalse: [
 			owner compiler
-				compiledMethodClass: (module
-						 lookupName: #CompiledMethod
-						 ifAbsent: [ NotFound signalFor: #CompiledMethod ]);
+				compiledMethodClass: (module lookupNameChecked: #CompiledMethod);
 				bindings: module;
 				environment: module;
 				class: owner;
@@ -151,6 +143,21 @@ MLModule class >> newNamed: aString [
 MLModule class >> topologicallySortClasses: classes [
 
 	^ MCDependencySorter sortItems: classes
+]
+
+{ #category : 'adding' }
+MLModule >> addExtensionTo: extendedClassName named: extensionName [
+
+	| extendedClass extensionClass |
+	extendedClass := self lookupNameChecked: extendedClassName.
+
+	extensionClass := self createClassFromDefinition:
+		                  ((MCClassDefinition named: extensionName)
+			                   superclassName: #MLClassExtension;
+			                   yourself).
+
+	extensionClass initializeWithExtendingClass: extendedClass.
+	^ extensionClass uniqueInstance
 ]
 
 { #category : 'adding' }
@@ -232,6 +239,9 @@ MLModule >> compiler [
 
 	^ OpalCompiler new
 		  environment: self;
+		  addParsePlugin: (MLExtensionCompilerPlugin new
+				   module: self;
+				   yourself);
 		  yourself
 ]
 
@@ -240,16 +250,12 @@ MLModule >> createClassFromDefinition: aClassDefinition [
 
 	| superclass builder newClass newComposition layoutclass |
 	aClassDefinition superclass ifNotNil: [
-		superclass := self
-			              lookupName: aClassDefinition superclassName
-			              ifAbsent: [
-			              NotFound signal: aClassDefinition superclassName ] ].
+		superclass := self lookupNameChecked:
+			              aClassDefinition superclassName ].
 	newComposition := self evaluate:
 		                  aClassDefinition traitCompositionString.
-	layoutclass := self
-		               lookupName: aClassDefinition layoutClassName
-		               ifAbsent: [
-		               NotFound signal: aClassDefinition layoutClassName ].
+	layoutclass := self lookupNameChecked:
+		               aClassDefinition layoutClassName.
 
 	builder := MLClassBuilder new
 		           superclass: superclass;
@@ -302,6 +308,26 @@ MLModule >> extendingPackagesOf: aClass [
 ]
 
 { #category : 'accessing' }
+MLModule >> extensionSelectors [
+	
+	^ self extensions flatCollect: [ :e | e extendedSelectors ]
+]
+
+{ #category : 'accessing' }
+MLModule >> extensions [
+
+	^ nameRegistry values
+		  select: [ :e | e isKindOf: MLClassExtension class ]
+		  thenCollect: [ :e | e uniqueInstance ]
+]
+
+{ #category : 'extensions' }
+MLModule >> extensionsOfSelector: aSelector [
+
+	^ self extensions select: [ :e | e extendsSelector: aSelector ]
+]
+
+{ #category : 'accessing' }
 MLModule >> initialize [
 
 	super initialize.
@@ -340,6 +366,12 @@ MLModule >> lookupName: aString ifPresent: aBlock [
 		at: aString
 		ifPresent: [ :found | ^ aBlock value: found ].
 	^ nameResolver lookupName: aString ifAbsent: [ nil ]
+]
+
+{ #category : 'name-resolution' }
+MLModule >> lookupNameChecked: aString [
+
+	^ self lookupName: aString ifAbsent: [ NotFound signal: aString ]
 ]
 
 { #category : 'lookup' }
