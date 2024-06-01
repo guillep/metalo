@@ -8,7 +8,8 @@ Class {
 		'methodList',
 		'codePresenter',
 		'moduleEnvironment',
-		'moduleActionBar'
+		'moduleActionBar',
+		'menuBar'
 	],
 	#category : 'Modules-UI',
 	#package : 'Modules',
@@ -19,7 +20,9 @@ Class {
 MLModuleBrowser >> connectPresenters [
 
 	moduleTree whenSelectedItemChangedDo: [ :e |
-		e ifNotNil: [ classList items: (e classes sorted: [ :a :b | a name < b name ]) ] ].
+		e ifNotNil: [ 
+			self updateClassList.
+			moduleTree contextMenu: self newModuleMenu ] ].
 	
 	classList whenSelectedItemChangedDo: [ :e |
 		e ifNotNil: [ methodList items: (e methods sorted: [ :a :b | a selector < b selector ]) ] ].
@@ -33,11 +36,36 @@ MLModuleBrowser >> connectPresenters [
 		classList selectedItem compile: codePresenter text ].
 ]
 
+{ #category : 'actions' }
+MLModuleBrowser >> createNewModule [
+	
+	| name kernelVirtualModule environment module |
+	name := self application newRequestText
+		label: 'Module Name';
+		openModal.
+	kernelVirtualModule := MLFilterModule
+		on: MLSystemModule new
+		named: #Kernel.
+	kernelVirtualModule filterName: #Object.
+	kernelVirtualModule filterName: #FixedLayout.
+
+	environment := MLListEnvironment new.
+	environment add: kernelVirtualModule.	
+
+	module := MLModule newNamed: name.
+	module nameResolver: environment.
+
+	moduleEnvironment register: module.
+
+	self updatePresenter
+]
+
 { #category : 'initialization' }
 MLModuleBrowser >> defaultLayout [
 
 	^ SpBoxLayout newVertical
 		  spacing: 5;
+		  add: menuBar expand: false;
 		  add: (SpBoxLayout newHorizontal
 				   spacing: 5;
 				   add: (SpBoxLayout newVertical
@@ -53,6 +81,19 @@ MLModuleBrowser >> defaultLayout [
 
 { #category : 'initialization' }
 MLModuleBrowser >> initializePresenters [
+
+	menuBar := self newMenuBar.
+	menuBar addGroup: [ :group |
+		group addItem: [ :item |
+			item
+				name: 'Module';
+				subMenu: (self newMenu
+						 addItem: [ :subitem |
+							 subitem
+								 name: 'New Module';
+								 icon: (self iconNamed: #smallQuit);
+								 action: [ self createNewModule ] ];
+						 yourself) ] ].
 
 	moduleActionBar := self newActionBar.
 	moduleActionBar add: (self newButton
@@ -71,6 +112,34 @@ MLModuleBrowser >> initializePresenters [
 	codePresenter := self newCode
 ]
 
+{ #category : 'instance creation' }
+MLModuleBrowser >> newClass [
+	
+	moduleTree selectedItem createNewClass.
+	self updateClassList.
+]
+
+{ #category : 'initialization' }
+MLModuleBrowser >> newModuleMenu [
+
+	^ self newMenu
+		  addItem: [ :subitem |
+			  subitem
+				  name: 'New class';
+				  icon: (self iconNamed: #smallQuit);
+				  action: [ self newClass ] ];
+		  addItem: [ :subitem |
+			  subitem
+				  name: 'New script';
+				  icon: (self iconNamed: #smallQuit);
+				  action: [ self newScript ] ];
+		  addItem: [ :subitem |
+			  subitem
+				  name: 'New extension';
+				  icon: (self iconNamed: #smallQuit);
+				  action: [ self newExtension ] ]
+]
+
 { #category : 'accessing - model' }
 MLModuleBrowser >> setModelBeforeInitialization: aModuleEnvironment [
 
@@ -78,7 +147,19 @@ MLModuleBrowser >> setModelBeforeInitialization: aModuleEnvironment [
 ]
 
 { #category : 'initialization' }
-MLModuleBrowser >> updatePresenter [
+MLModuleBrowser >> updateClassList [
+	
+	classList items: (moduleTree selectedItem classes sorted: [ :a :b | a name < b name ]).
+]
+
+{ #category : 'initialization' }
+MLModuleBrowser >> updateModuleTree [
 
 	moduleTree roots: (moduleEnvironment modules sorted: [ :a :b | a name < b name ])
+]
+
+{ #category : 'initialization' }
+MLModuleBrowser >> updatePresenter [
+
+	self updateModuleTree
 ]

@@ -46,7 +46,7 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 	classDefinitions do: [ :e |
 		[ module createClassFromDefinition: e ]
 			on: Error
-			do: [ :e | errors add: e freeze ] ].
+			do: [ :error | errors add: error freeze ] ].
 
 	"Then compile all methods"
 	classDefinitions do: [ :e |
@@ -69,7 +69,7 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 				"compatibility: permit undeclared if no requestor"logged: false;
 				install ]
 				on: Error
-				do: [ :e | errors add: e freeze ] ].
+				do: [ :error | errors add: error freeze ] ].
 
 		(aPackageDefinition definedMethodsForClass: e isMeta: true) do: [ :m |
 			[
@@ -89,7 +89,7 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 				"compatibility: permit undeclared if no requestor"logged: false;
 				install ]
 				on: Error
-				do: [ :e | errors add: e freeze ] ] ].
+				do: [ :error | errors add: error freeze ] ] ].
 
 	"Then compile all methods"
 	aPackageDefinition extensionMethods do: [ :e |
@@ -116,7 +116,7 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 				"compatibility: permit undeclared if no requestor"logged: false;
 				install ] ]
 			on: Error
-			do: [ :e | errors add: e freeze ] ].
+			do: [ :error | errors add: error freeze ] ].
 
 	module classes
 		select: [ :e | e class includesLocalSelector: #initialize ]
@@ -150,26 +150,7 @@ MLModule class >> newNamed: aString [
 { #category : 'private' }
 MLModule class >> topologicallySortClasses: classes [
 
-	| leftToSort sorted |
-	
 	^ MCDependencySorter sortItems: classes
-	"leftToSort := classes.
-	sorted := OrderedCollection new.
-
-	[ leftToSort notEmpty ] whileTrue: [
-		| currentIterationToSort |
-		currentIterationToSort := leftToSort.
-		leftToSort := OrderedCollection new.
-		currentIterationToSort do: [ :e | | dependencies shouldSortClass |
-			dependencies := { e superclass }, e traitComposition traits.
-			shouldSortClass := dependencies allSatisfy: [ :d |
-				""The dependency is external or already defined, thus satisfied""
-				(classes includes: d) not or: [ sorted includes: d ]
-			].
-			shouldSortClass
-				ifTrue: [ sorted add: e ]
-				ifFalse: [ leftToSort add: e ] ] ].
-	^ sorted"
 ]
 
 { #category : 'adding' }
@@ -288,6 +269,12 @@ MLModule >> createClassFromDefinition: aClassDefinition [
 	newClass := builder build.
 	self at: aClassDefinition name put: newClass.
 	^ newClass
+]
+
+{ #category : 'class-installation' }
+MLModule >> createNewClass [
+
+	^ self createClassFromDefinition: (MCClassDefinition named: 'NewClass')
 ]
 
 { #category : 'accessing' }
