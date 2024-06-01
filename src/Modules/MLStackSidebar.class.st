@@ -1,7 +1,6 @@
 Class {
 	#name : 'MLStackSidebar',
 	#superclass : 'SpPresenter',
-	#classTraits : '{} + TraitedClass',
 	#instVars : [
 		'stackPresenter',
 		'stack'

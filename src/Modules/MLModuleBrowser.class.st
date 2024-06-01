@@ -1,7 +1,6 @@
 Class {
 	#name : 'MLModuleBrowser',
 	#superclass : 'SpPresenter',
-	#classTraits : '{} + TraitedClass',
 	#instVars : [
 		'moduleTree',
 		'classList',

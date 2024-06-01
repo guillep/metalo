@@ -1,7 +1,6 @@
 Class {
 	#name : 'MLStackPresenter',
 	#superclass : 'SpPresenter',
-	#classTraits : '{} + TraitedClass',
 	#instVars : [
 		'activePage',
 		'stackPages'

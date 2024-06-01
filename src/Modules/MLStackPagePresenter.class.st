@@ -1,7 +1,6 @@
 Class {
 	#name : 'MLStackPagePresenter',
 	#superclass : 'SpPresenter',
-	#classTraits : '{} + TraitedClass',
 	#instVars : [
 		'child',
 		'icon',

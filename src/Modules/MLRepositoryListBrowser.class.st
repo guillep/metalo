@@ -1,7 +1,6 @@
 Class {
 	#name : 'MLRepositoryListBrowser',
 	#superclass : 'SpPresenter',
-	#classTraits : '{} + TraitedClass',
 	#instVars : [
 		'icebergRepositoriesBrowser',
 		'moduleManager',
