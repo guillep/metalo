@@ -1,6 +1,9 @@
 Class {
 	#name : 'GlobalExtensionPlugin',
 	#superclass : 'Object',
+	#classInstVars : [
+		'activeExtensionCache'
+	],
 	#category : 'ExtensionImpl-Core',
 	#package : 'ExtensionImpl',
 	#tag : 'Core'
