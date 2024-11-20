@@ -41,15 +41,22 @@ ExtensionSelector >> asLowercase [
 	^ selector asLowercase
 ]
 
+{ #category : 'private' }
+ExtensionSelector >> asSelector [
+	
+	^ self
+]
+
 { #category : 'converting' }
 ExtensionSelector >> asString [
 
-	^ self selector asString
+	^ self selector asString, ' (Extension)'
 ]
 
 { #category : 'private' }
 ExtensionSelector >> asSymbol [
 
+	1haltOnce.
 	^ selector
 ]
 
@@ -199,4 +206,10 @@ ExtensionSelector >> size [
 
 	"When in a string morph?"
 	^ selector size
+]
+
+{ #category : 'as yet unclassified' }
+ExtensionSelector >> threeWayCompareTo: aString [
+
+	^ selector threeWayCompareTo: aString
 ]
