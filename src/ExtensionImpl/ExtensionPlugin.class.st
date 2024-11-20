@@ -36,10 +36,12 @@ ExtensionPlugin >> extensionSelectorsInClass: aClass [
 ExtensionPlugin >> transform: aRBMethodNode [
 
 	| selectors |
+	1halt.
 	selectors := self extensionSelectorsInClass:
 		             aRBMethodNode methodClass.
 	aRBMethodNode nodesDo: [ :node |
 		(node isMessage and: [ selectors includes: node selector ]) ifTrue: [
+			1halt.
 			node selector:
 				(RBSelectorNode value: (ExtensionSelector on: node selector)) ] ].
 	^ aRBMethodNode
