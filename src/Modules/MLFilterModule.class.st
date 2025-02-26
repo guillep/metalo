@@ -67,7 +67,14 @@ MLFilterModule >> initialize [
 MLFilterModule >> lookupName: aString ifPresent: aFullBlockClosure [
 
 	(acceptedNames includes: aString) ifFalse: [ ^ nil ].
-	^ environment at: aString
+	^ aFullBlockClosure value: (environment lookupName: aString)
+]
+
+{ #category : 'name-resolution' }
+MLFilterModule >> lookupVar: aString ifPresent: aFullBlockClosure [
+
+	(acceptedNames includes: aString) ifFalse: [ ^ nil ].
+	^ aFullBlockClosure value: (environment lookupVar: aString)
 ]
 
 { #category : 'accessing' }

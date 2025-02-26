@@ -32,18 +32,19 @@ MLModule class >> fromPackage: aPackage nameResolver: aNameResolver [
 { #category : 'instance creation' }
 MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesToFilterOut nameResolver: aNameResolver [
 
-	| classDefinitions module errors |
+	| classDefinitions module errors sortedMCDefinitions |
 	errors := OrderedCollection new.
 
 	classDefinitions := aPackageDefinition definedClasses reject: [ :e |
 		                    namesToFilterOut includes: e name ].
-	classDefinitions := self topologicallySortClasses: classDefinitions.
+	sortedMCDefinitions := self topologicallySortClasses: classDefinitions.
+	classDefinitions := sortedMCDefinitions collect: [ :e | classDefinitions detect: [ :class | class name = e name  ] ].
 
 	module := self newNamed: aName.
 	module nameResolver: aNameResolver.
 
 	"First define all names in the namespace"
-	classDefinitions do: [ :e |
+	sortedMCDefinitions do: [ :e |
 		[ module createClassFromDefinition: e ]
 			on: Error
 			do: [ :error | errors add: error freeze ] ].
@@ -51,9 +52,10 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 	"Then compile all methods"
 	classDefinitions do: [ :e |
 		(aPackageDefinition definedMethodsForClass: e isMeta: false) do: [
-			:m |
+			:method |
 			[
-			| owner |
+			| owner m |
+			m := method asMCMethodDefinition.
 			owner := module lookupName: e name.
 			owner compiler
 				compiledMethodClass: (module lookupNameChecked: #CompiledMethod);
@@ -69,9 +71,10 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 				on: Error
 				do: [ :error | errors add: error freeze ] ].
 
-		(aPackageDefinition definedMethodsForClass: e isMeta: true) do: [ :m |
-			[
-			| owner |
+		(aPackageDefinition definedMethodsForClass: e isMeta: true)
+			do: [ :method | [
+			| owner m |
+			m := method asMCMethodDefinition.
 			owner := (module at: e name) class.
 			owner compiler
 				compiledMethodClass: (module lookupNameChecked: #CompiledMethod);
@@ -110,14 +113,15 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 			on: Error
 			do: [ :error | errors add: error freeze ] ].
 
-	module classes
-		select: [ :e | e class includesLocalSelector: #initialize ]
-		thenDo: [ :e | e initialize ].
-
 	errors ifNotEmpty: [
 		MLModuleCompilationError new
 			errors: errors;
 			signal ].
+
+	module classes
+		select: [ :e | e class includesLocalSelector: #initialize ]
+		thenDo: [ :e | e initialize ].
+
 	^ module
 ]
 
@@ -142,7 +146,7 @@ MLModule class >> newNamed: aString [
 { #category : 'private' }
 MLModule class >> topologicallySortClasses: classes [
 
-	^ MCDependencySorter sortItems: classes
+	^ MCDependencySorter sortItems: (classes collect: [ :e | e asClassDefinition ])
 ]
 
 { #category : 'adding' }
@@ -225,7 +229,7 @@ MLModule >> at: aString put: aValue [
 MLModule >> bindingOf: aName [
 	| binding |
 	binding := nameRegistry bindingOf: aName.
-	^ binding ifNil: [ nameResolver lookupVar: aName ]
+	^ binding ifNil: [ nameResolver lookupName: aName ]
 ]
 
 { #category : 'accessing' }

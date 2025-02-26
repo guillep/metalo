@@ -24,9 +24,29 @@ MLModuleRegistry >> initialize [
 { #category : 'name-resolution' }
 MLModuleRegistry >> lookupName: aString [
 
+	^ self lookupName: aString ifAbsent: [ nil ]
+]
+
+{ #category : 'name-resolution' }
+MLModuleRegistry >> lookupName: aString ifAbsent: aFullBlockClosure [
+
 	moduleDictionary values do: [ :e |
 		e lookupName: aString ifPresent: [ :found | ^ found ] ].
-	^ nil
+	^ aFullBlockClosure value
+]
+
+{ #category : 'name-resolution' }
+MLModuleRegistry >> lookupVar: aString [
+
+	^ self lookupVar: aString ifAbsent: [ nil ]
+]
+
+{ #category : 'name-resolution' }
+MLModuleRegistry >> lookupVar: aString ifAbsent: aFullBlockClosure [
+
+	moduleDictionary values do: [ :e |
+		e lookupVar: aString ifPresent: [ :found | ^ found ] ].
+	^ aFullBlockClosure value
 ]
 
 { #category : 'accessing' }
