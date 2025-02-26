@@ -381,17 +381,22 @@ MLModule >> lookupNameChecked: aString [
 { #category : 'lookup' }
 MLModule >> lookupVar: aString [
 
-	"Compiler compatibility"
-	| binding |
+	^ self lookupVar: aString ifPresent: [ :p | p ]
+]
 
+{ #category : 'lookup' }
+MLModule >> lookupVar: aString ifPresent: aBlock [
+	"Compiler compatibility"
+
+	| binding |
 	PseudoVariable lookupDictionary
 		at: aString
-		ifPresent: [ :found | ^ found ].
-	
+		ifPresent: [ :found | ^ aBlock value: found ].
+
 	binding := nameRegistry bindingOf: aString.
-	binding ifNotNil: [ ^ binding ].
-	
-	^ nameResolver lookupVar: aString
+	binding ifNotNil: [ ^ aBlock value: binding ].
+
+	^ aBlock value: (nameResolver lookupVar: aString ifAbsent: [ ^ nil ])
 ]
 
 { #category : 'accessing' }
