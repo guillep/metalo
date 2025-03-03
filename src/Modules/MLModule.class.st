@@ -59,6 +59,7 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 			owner := module lookupName: e name.
 			owner compiler
 				compiledMethodClass: (module lookupNameChecked: #CompiledMethod);
+				compiledBlockClass: (module lookupNameChecked: #CompiledBlock);
 				bindings: module;
 				class: owner;
 				protocol: m protocol;
@@ -78,6 +79,7 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 			owner := (module at: e name) class.
 			owner compiler
 				compiledMethodClass: (module lookupNameChecked: #CompiledMethod);
+				compiledBlockClass: (module lookupNameChecked: #CompiledBlock);
 				bindings: module;
 				class: owner;
 				protocol: m protocol;
@@ -91,20 +93,21 @@ MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesT
 				do: [ :error | errors add: error freeze ] ] ].
 
 	"Then compile all methods"
-	aPackageDefinition extensionMethods do: [ :e |
-		[
-		| owner |
-		owner := module lookupNameChecked: e className.
-		e classIsMeta ifTrue: [ owner := owner classSide ].
+	aPackageDefinition extensionMethods do: [ :method | [
+		| owner m |
+		m := method asMCMethodDefinition.
+		owner := module lookupNameChecked: m className.
+		m classIsMeta ifTrue: [ owner := owner classSide ].
 		"Ignore conflicting extensions for now"
-		(owner includesSelector: e selector) ifFalse: [
+		(owner includesSelector: m selector) ifFalse: [
 			owner compiler
 				compiledMethodClass: (module lookupNameChecked: #CompiledMethod);
+				compiledBlockClass: (module lookupNameChecked: #CompiledBlock);
 				bindings: module;
 				environment: module;
 				class: owner;
-				protocol: e protocol;
-				source: e source;
+				protocol: m protocol;
+				source: m source;
 				requestor: nil;
 				failBlock: nil;
 				"no failblock if no requestor"permitUndeclared: false;
