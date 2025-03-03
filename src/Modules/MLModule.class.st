@@ -229,7 +229,7 @@ MLModule >> at: aString put: aValue [
 MLModule >> bindingOf: aName [
 	| binding |
 	binding := nameRegistry bindingOf: aName.
-	^ binding ifNil: [ nameResolver lookupName: aName ]
+	^ binding ifNil: [ nameResolver lookupVar: aName ]
 ]
 
 { #category : 'accessing' }
