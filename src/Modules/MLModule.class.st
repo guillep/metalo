@@ -14,6 +14,16 @@ Class {
 MLModule class >> fromPackage: aPackage except: namesToFilterOut nameResolver: aNameResolver [
 
 	^ self
+		  fromPackage: aPackage
+		  except: namesToFilterOut
+		  nameResolver: aNameResolver
+		  compilerClass: OpalCompiler
+]
+
+{ #category : 'instance creation' }
+MLModule class >> fromPackage: aPackage except: namesToFilterOut nameResolver: aNameResolver compilerClass: aCompilerClass [
+
+	^ (MLModuleBuilder forCompilerClass: aCompilerClass)
 		  named: aPackage asPackage name
 		  fromDefinition: aPackage asPackage
 		  except: namesToFilterOut
@@ -30,108 +40,19 @@ MLModule class >> fromPackage: aPackage nameResolver: aNameResolver [
 ]
 
 { #category : 'instance creation' }
-MLModule class >> named: aName fromDefinition: aPackageDefinition except: namesToFilterOut nameResolver: aNameResolver [
+MLModule class >> fromPackage: aPackage nameResolver: aNameResolver compilerClass: aCompilerClass [
 
-	| classDefinitions module errors sortedMCDefinitions |
-	errors := OrderedCollection new.
-
-	classDefinitions := aPackageDefinition definedClasses reject: [ :e |
-		                    namesToFilterOut includes: e name ].
-	sortedMCDefinitions := self topologicallySortClasses: classDefinitions.
-	classDefinitions := sortedMCDefinitions collect: [ :e | classDefinitions detect: [ :class | class name = e name  ] ].
-
-	module := self newNamed: aName.
-	module nameResolver: aNameResolver.
-
-	"First define all names in the namespace"
-	sortedMCDefinitions do: [ :e |
-		[ module createClassFromDefinition: e ]
-			on: Error
-			do: [ :error | errors add: error freeze ] ].
-
-	"Then compile all methods"
-	classDefinitions do: [ :e |
-		(aPackageDefinition definedMethodsForClass: e isMeta: false) do: [
-			:method |
-			[
-			| owner m |
-			m := method asMCMethodDefinition.
-			owner := module lookupName: e name.
-			owner compiler
-				compiledMethodClass: (module lookupNameChecked: #CompiledMethod);
-				compiledBlockClass: (module lookupNameChecked: #CompiledBlock);
-				bindings: module;
-				class: owner;
-				protocol: m protocol;
-				source: m source;
-				requestor: nil;
-				failBlock: nil;
-				"no failblock if no requestor"permitUndeclared: false;
-				"compatibility: permit undeclared if no requestor"logged: false;
-				install ]
-				on: Error
-				do: [ :error | errors add: error freeze ] ].
-
-		(aPackageDefinition definedMethodsForClass: e isMeta: true)
-			do: [ :method | [
-			| owner m |
-			m := method asMCMethodDefinition.
-			owner := (module at: e name) class.
-			owner compiler
-				compiledMethodClass: (module lookupNameChecked: #CompiledMethod);
-				compiledBlockClass: (module lookupNameChecked: #CompiledBlock);
-				bindings: module;
-				class: owner;
-				protocol: m protocol;
-				source: m source;
-				requestor: nil;
-				failBlock: nil;
-				"no failblock if no requestor"permitUndeclared: false;
-				"compatibility: permit undeclared if no requestor"logged: false;
-				install ]
-				on: Error
-				do: [ :error | errors add: error freeze ] ] ].
-
-	"Then compile all methods"
-	aPackageDefinition extensionMethods do: [ :method | [
-		| owner m |
-		m := method asMCMethodDefinition.
-		owner := module lookupNameChecked: m className.
-		m classIsMeta ifTrue: [ owner := owner classSide ].
-		"Ignore conflicting extensions for now"
-		(owner includesSelector: m selector) ifFalse: [
-			owner compiler
-				compiledMethodClass: (module lookupNameChecked: #CompiledMethod);
-				compiledBlockClass: (module lookupNameChecked: #CompiledBlock);
-				bindings: module;
-				environment: module;
-				class: owner;
-				protocol: m protocol;
-				source: m source;
-				requestor: nil;
-				failBlock: nil;
-				"no failblock if no requestor"permitUndeclared: false;
-				"compatibility: permit undeclared if no requestor"logged: false;
-				install ] ]
-			on: Error
-			do: [ :error | errors add: error freeze ] ].
-
-	errors ifNotEmpty: [
-		MLModuleCompilationError new
-			errors: errors;
-			signal ].
-
-	module classes
-		select: [ :e | e class includesLocalSelector: #initialize ]
-		thenDo: [ :e | e initialize ].
-
-	^ module
+	^ self
+		  fromPackage: aPackage
+		  except: #(  )
+		  nameResolver: aNameResolver
+		  compilerClass: aCompilerClass
 ]
 
 { #category : 'instance creation' }
 MLModule class >> named: aName fromDefinition: aPackageDefinition nameResolver: aNameResolver [
 
-	^ self
+	^ MLModuleBuilder new
 		  named: aName
 		  fromDefinition: aPackageDefinition
 		  except: #(  )
@@ -144,12 +65,6 @@ MLModule class >> newNamed: aString [
 	^ self new
 		  name: aString;
 		  yourself
-]
-
-{ #category : 'private' }
-MLModule class >> topologicallySortClasses: classes [
-
-	^ MCDependencySorter sortItems: (classes collect: [ :e | e asClassDefinition ])
 ]
 
 { #category : 'adding' }
