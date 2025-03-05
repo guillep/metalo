@@ -307,10 +307,6 @@ MLModule >> lookupVar: aString ifPresent: aBlock [
 	"Compiler compatibility"
 
 	| binding |
-	PseudoVariable lookupDictionary
-		at: aString
-		ifPresent: [ :found | ^ aBlock value: found ].
-
 	binding := nameRegistry bindingOf: aString.
 	binding ifNotNil: [ ^ aBlock value: binding ].
 
