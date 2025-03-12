@@ -36,13 +36,15 @@ MLModuleBuilder >> initialize [
 { #category : 'instance creation' }
 MLModuleBuilder >> installMethod: m inOwner: owner [
 
-	| methodDefinition |
+	| methodDefinition compiler |
 	methodDefinition := m asMCMethodDefinition.
-	^ self newCompiler
+	compiler := self newCompiler
 		class: owner;
-		protocol: methodDefinition protocol;
 		source: methodDefinition source;
-		install
+		yourself.
+	compiler installer
+		protocol: methodDefinition protocol.
+	compiler install
 ]
 
 { #category : 'instance creation' }
@@ -76,7 +78,10 @@ MLModuleBuilder >> named: aName fromDefinition: aPackageDefinition except: names
 
 	"First define all names in the namespace"
 	sortedMCDefinitions do: [ :e |
-		[ module createClassFromDefinition: e ]
+		[
+		e isTraitDefinition
+			ifTrue: [ module createTraitFromDefinition: e ]
+			ifFalse: [ module createClassFromDefinition: e ] ]
 			on: Error
 			do: [ :error | errors add: error freeze ] ].
 
@@ -129,10 +134,7 @@ MLModuleBuilder >> newCompiler [
 		  compiledBlockClass: compiledBlockClass;
 		  environment: module;
 		  bindings: module;
-		  requestor: nil;
-		  failBlock: nil;
 		  permitUndeclared: false;
-		  logged: false;
 		  yourself
 ]
 

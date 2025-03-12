@@ -185,7 +185,7 @@ MLModule >> createClassFromDefinition: aClassDefinition [
 		           name: aClassDefinition name;
 		           slots: aClassDefinition instVarNames;
 		           classSlots: aClassDefinition classInstanceVariables;
-		           classTraits: newComposition;
+		           traits: newComposition;
 		           sharedVariablesFromString:
 			           aClassDefinition classVariablesString;
 		           buildEnvironment: (MLClassBuilderEnvironmentAdapter new
@@ -203,6 +203,39 @@ MLModule >> createClassFromDefinition: aClassDefinition [
 MLModule >> createNewClass [
 
 	^ self createClassFromDefinition: (MCClassDefinition named: 'NewClass')
+]
+
+{ #category : 'class-installation' }
+MLModule >> createTraitFromDefinition: aClassDefinition [
+
+	| superclass builder newClass newComposition layoutclass |
+	aClassDefinition superclass ifNotNil: [
+		superclass := self lookupNameChecked:
+			              aClassDefinition superclassName ].
+	newComposition := self evaluate:
+		                  aClassDefinition traitCompositionString.
+	layoutclass := self lookupNameChecked:
+		               aClassDefinition layoutClassName.
+
+	builder := MLClassBuilder new
+		           superclass: superclass;
+		           layoutClass: layoutclass;
+		           name: aClassDefinition name;
+		           slots: aClassDefinition instVarNames;
+		           classSlots: aClassDefinition classInstanceVariables;
+		           classTraits: newComposition;
+		           sharedVariablesFromString:
+			           aClassDefinition classVariablesString;
+		           buildEnvironment: (MLClassBuilderEnvironmentAdapter new
+				            module: self;
+				            yourself);
+		           beTrait;
+		           yourself.
+
+	"Hack so it does not go look in the system for a class with the same name"
+	newClass := builder build.
+	self at: aClassDefinition name put: newClass.
+	^ newClass
 ]
 
 { #category : 'accessing' }
