@@ -61,7 +61,9 @@ MLClassBuilderEnvironmentAdapter >> hasClassNamed: aString [
 MLClassBuilderEnvironmentAdapter >> lookupVar: aString [
 	"Lookup a var in the environment and all its dependencies"
 
-	^ module lookupVar: aString
+	^ PseudoVariable lookupDictionary
+		  at: aString
+		  ifAbsent: [ module lookupVar: aString ]
 ]
 
 { #category : 'accessing' }
@@ -80,4 +82,10 @@ MLClassBuilderEnvironmentAdapter >> module: anObject [
 MLClassBuilderEnvironmentAdapter >> organization [
 
 	^ module organization
+]
+
+{ #category : 'accessing' }
+MLClassBuilderEnvironmentAdapter >> undeclaredRegistry [
+	
+	^ Dictionary new
 ]
