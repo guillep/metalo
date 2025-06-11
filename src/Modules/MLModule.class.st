@@ -159,11 +159,8 @@ MLModule >> classes [
 { #category : 'compiler' }
 MLModule >> compiler [
 
-	^ OpalCompiler new
-		  environment: self;
-		  addParsePlugin: (MLExtensionCompilerPlugin new
-				   module: self;
-				   yourself);
+	^ AREvaluator new
+		  bindings: self;
 		  yourself
 ]
 
