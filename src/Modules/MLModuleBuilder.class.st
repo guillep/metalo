@@ -124,18 +124,21 @@ MLModuleBuilder >> named: aName fromDefinition: aPackageDefinition except: names
 { #category : 'instance creation' }
 MLModuleBuilder >> newCompiler [
 
-	| compiledMethodClass compiledBlockClass |
-	compiledMethodClass := module lookupNameChecked: #CompiledMethod.
-	compiledBlockClass := module lookupNameChecked: #CompiledBlock.
+	| compiledMethodClass compiledBlockClass compiler |
+	compiledMethodClass := module lookupNameChecked: #PetitCompiledMethod.
+	compiledBlockClass := module lookupNameChecked: #PetitCompiledBlock.
 
+	self assert: (compiledMethodClass name = #PetitCompiledMethod).
 
-	^ compilerClass new
+	compiler := compilerClass new
 		  compiledMethodClass: compiledMethodClass;
 		  compiledBlockClass: compiledBlockClass;
 		  environment: module;
 		  bindings: module;
 		  permitUndeclared: false;
-		  yourself
+		  yourself.
+	compiler installer logged: false.
+	^ compiler
 ]
 
 { #category : 'instance creation' }
