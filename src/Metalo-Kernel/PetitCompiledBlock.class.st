@@ -251,11 +251,6 @@ PetitCompiledBlock >> selector [
 	^ self outerCode selector
 ]
 
-{ #category : 'accessing' }
-PetitCompiledBlock >> sourceCode [
-	^ self outerCode sourceCode
-]
-
 { #category : 'source code management' }
 PetitCompiledBlock >> sourcePointer [
 	^self outerCode sourcePointer

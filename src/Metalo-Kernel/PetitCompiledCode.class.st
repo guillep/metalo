@@ -293,6 +293,12 @@ PetitCompiledCode >> comment [
 	^ self ast firstPrecodeComment
 ]
 
+{ #category : 'debugger support' }
+PetitCompiledCode >> debugInfo [
+
+	^ NullDebugInfo new
+]
+
 { #category : 'source code management' }
 PetitCompiledCode >> definitionString [
 
@@ -1004,16 +1010,11 @@ PetitCompiledCode >> signFlag [
 
 { #category : 'accessing' }
 PetitCompiledCode >> sourceCode [
-	^ self subclassResponsibility
+	^ ''
 ]
 
 { #category : 'accessing' }
 PetitCompiledCode >> sourceNode [
-	^ self subclassResponsibility
-]
-
-{ #category : 'accessing' }
-PetitCompiledCode >> sourceNodeForPC: arg1 [
 	^ self subclassResponsibility
 ]
 

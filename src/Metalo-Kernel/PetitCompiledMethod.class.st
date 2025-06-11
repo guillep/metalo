@@ -880,15 +880,6 @@ PetitCompiledMethod >> setSourcePointer: srcPointer [
 ]
 
 { #category : 'accessing' }
-PetitCompiledMethod >> sourceCode [
-	"Retrieve or reconstruct the source code for this method."
-
-	^ self sourceCodeOrNil
-		  ifNotNil: [ :code | ^ code ]
-		  ifNil: [ self codeForNoSource ]
-]
-
-{ #category : 'accessing' }
 PetitCompiledMethod >> sourceCodeOrNil [
 	"Retrieve the source code for this method, or return nil."
 
